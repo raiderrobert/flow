@@ -1,0 +1,15 @@
+{
+  "name": "flow-dev",
+  "description": "Development marketplace for flow skills",
+  "owner": {
+    "name": "raiderrobert"
+  },
+  "plugins": [
+    {
+      "name": "flow",
+      "description": "Rust skills, domain expertise, and development workflows for Claude Code",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}
