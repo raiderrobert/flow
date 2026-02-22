@@ -6,9 +6,7 @@ user-invocable: false
 
 # Cloud-Native Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -45,26 +43,6 @@ RUST: tokio::signal + graceful shutdown
 RULE: Every request must be traceable
 WHY: Debugging distributed systems
 RUST: tracing spans, opentelemetry export
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need distributed tracing"
-    ↓ rust: Span lifecycle
-    ↓ tracing + opentelemetry
-
-"Need graceful shutdown"
-    ↓ rust: Signal handling
-    ↓ rust: Connection draining
-
-"Need health checks"
-    ↓ domain-web: HTTP endpoints
-    ↓ rust: Health status
 ```
 
 ---
@@ -142,17 +120,6 @@ async fn ready(State(db): State<Arc<DbPool>>) -> StatusCode {
 | No SIGTERM handling | Hard kills | Graceful shutdown |
 | No tracing | Can't debug | tracing spans |
 | Static config | Not 12-factor | Env vars |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Stateless | External state | Arc<Client> for external |
-| Graceful shutdown | Signal handling | tokio::signal |
-| Tracing | Span lifecycle | tracing + OTEL |
-| Health checks | HTTP endpoints | Dedicated routes |
 
 ---
 

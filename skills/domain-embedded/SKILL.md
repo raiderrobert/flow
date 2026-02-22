@@ -14,9 +14,7 @@ user-invocable: false
 
 # Embedded Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -53,26 +51,6 @@ RUST: Mutex<RefCell<T>> + critical section
 RULE: Peripherals must have clear ownership
 WHY: Prevent conflicting access
 RUST: HAL takes ownership, singletons
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need no_std compatible data structures"
-    ↓ rust: heapless collections
-    ↓ Static sizing: heapless::Vec<T, N>
-
-"Need interrupt-safe state"
-    ↓ rust: Mutex<RefCell<Option<T>>>
-    ↓ rust: Critical sections
-
-"Need peripheral ownership"
-    ↓ rust: Singleton pattern
-    ↓ rust: RAII for hardware
 ```
 
 ---
@@ -154,17 +132,6 @@ fn main() -> ! {
 | No critical section | Race with ISR | Mutex + interrupt::free |
 | Blocking in ISR | Missed interrupts | Defer to main loop |
 | Unsafe peripheral | Hardware conflict | HAL ownership |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| No heap | Static collections | heapless::Vec<T, N> |
-| ISR safety | Critical sections | Mutex<RefCell<T>> |
-| Hardware ownership | Singleton | take().unwrap() |
-| no_std | Core-only | #![no_std], #![no_main] |
 
 ---
 

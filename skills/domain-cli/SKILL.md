@@ -7,9 +7,7 @@ user-invocable: false
 
 # CLI Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -45,26 +43,6 @@ RUST: Layered config with clap + figment/config
 RULE: Return non-zero on any error
 WHY: Script integration, automation
 RUST: main() -> Result<(), Error> or explicit exit()
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need argument parsing"
-    ↓ rust: Derive structs for args
-    ↓ clap: #[derive(Parser)]
-
-"Need config layering"
-    ↓ rust: Config as domain object
-    ↓ figment/config: Layer sources
-
-"Need progress display"
-    ↓ rust: Progress bar as RAII
-    ↓ indicatif: ProgressBar
 ```
 
 ---
@@ -137,17 +115,6 @@ fn main() -> anyhow::Result<()> {
 | No help text | Poor UX | #[arg(help = "...")] |
 | Panic on error | Bad exit code | Result + proper handling |
 | No progress for long ops | User uncertainty | indicatif |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Type-safe args | Derive macros | clap Parser |
-| Error handling | Result propagation | anyhow + exit codes |
-| User feedback | Progress RAII | indicatif ProgressBar |
-| Config precedence | Builder pattern | Layered sources |
 
 ---
 

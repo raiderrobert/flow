@@ -6,9 +6,7 @@ user-invocable: false
 
 # Machine Learning Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -45,26 +43,6 @@ RUST: Batch sizes, async data loading
 RULE: Use standard model formats
 WHY: Train in Python, deploy in Rust
 RUST: ONNX via tract or candle
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need efficient data pipelines"
-    ↓ rust: Streaming, batching
-    ↓ polars: Lazy evaluation
-
-"Need GPU inference"
-    ↓ rust: Async data loading
-    ↓ candle/tch-rs: CUDA backend
-
-"Need model loading"
-    ↓ rust: Lazy init, caching
-    ↓ tract: ONNX runtime
 ```
 
 ---
@@ -157,17 +135,6 @@ async fn batch_predict(inputs: Vec<Vec<f32>>, batch_size: usize) -> Vec<Vec<f32>
 | Single inference | GPU underutilized | Batch processing |
 | Load model per request | Slow | Singleton pattern |
 | Sync data loading | GPU idle | Async pipeline |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Memory efficiency | Zero-copy | ndarray views |
-| Model singleton | Lazy init | OnceLock<Model> |
-| Batch processing | Chunked iteration | chunks() + parallel |
-| GPU async | Concurrent loading | tokio::spawn + GPU |
 
 ---
 

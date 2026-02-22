@@ -103,7 +103,6 @@ Start a new session and ask a Rust question. The agent should automatically invo
 | core-dynamic-skills | Dynamic skill loading and management |
 | core-fix-skill-docs | Internal skill documentation maintenance |
 | meta-cognition-parallel | Three-layer parallel meta-cognition analysis |
-| using-flow | Bootstrapper for discovering flow skills |
 
 ## License
 

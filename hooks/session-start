@@ -3,30 +3,12 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
-PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
-
-using_flow_content=$(cat "${PLUGIN_ROOT}/skills/using-flow/SKILL.md" 2>&1 || echo "Error reading using-flow skill")
-
-escape_for_json() {
-    local s="$1"
-    s="${s//\\/\\\\}"
-    s="${s//\"/\\\"}"
-    s="${s//$'\n'/\\n}"
-    s="${s//$'\r'/\\r}"
-    s="${s//$'\t'/\\t}"
-    printf '%s' "$s"
-}
-
-using_flow_escaped=$(escape_for_json "$using_flow_content")
-session_context="<EXTREMELY_IMPORTANT>\nYou have flow skills.\n\n**Below is the full content of your 'flow:using-flow' skill - your introduction to using flow skills. For all other skills, use the 'Skill' tool:**\n\n${using_flow_escaped}\n</EXTREMELY_IMPORTANT>"
-
 cat <<EOF
 {
-  "additional_context": "${session_context}",
+  "additional_context": "You have flow skills available. Use the Skill tool to invoke them when relevant.",
   "hookSpecificOutput": {
     "hookEventName": "SessionStart",
-    "additionalContext": "${session_context}"
+    "additionalContext": "You have flow skills available. Use the Skill tool to invoke them when relevant."
   }
 }
 EOF

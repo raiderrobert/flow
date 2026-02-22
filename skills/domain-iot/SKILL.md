@@ -6,9 +6,7 @@ user-invocable: false
 
 # IoT Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -45,26 +43,6 @@ RUST: Sleep modes, efficient algorithms
 RULE: All communication encrypted
 WHY: Physical access possible
 RUST: TLS, signed messages
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need offline-first design"
-    ↓ rust: Local buffer with persistence
-    ↓ rust: Retry with backoff
-
-"Need power efficiency"
-    ↓ domain-embedded: no_std patterns
-    ↓ rust: Minimal allocations
-
-"Need reliable messaging"
-    ↓ rust: Async with timeout
-    ↓ MQTT: QoS levels
 ```
 
 ---
@@ -144,17 +122,6 @@ async fn run_mqtt() -> anyhow::Result<()> {
 | Always-on radio | Battery drain | Sleep between sends |
 | Unencrypted MQTT | Security risk | TLS |
 | No local buffer | Network outage = data loss | Persist locally |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Offline-first | Store & forward | Local queue + flush |
-| Power efficiency | Sleep patterns | Timer-based wake |
-| Network reliability | Retry | tokio-retry, backoff |
-| Security | TLS | rustls, native-tls |
 
 ---
 

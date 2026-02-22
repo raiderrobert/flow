@@ -7,9 +7,7 @@ user-invocable: false
 
 # Web Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -45,26 +43,6 @@ RUST: Arc<T>, Arc<RwLock<T>> for mutable
 RULE: Resources live only for request duration
 WHY: Memory management, no leaks
 RUST: Extractors, proper ownership
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need shared application state"
-    ↓ rust: Use Arc for thread-safe sharing
-    ↓ rust: Arc<RwLock<T>> for mutable state
-
-"Need request validation"
-    ↓ rust: Validated extractors
-    ↓ rust: IntoResponse for errors
-
-"Need middleware stack"
-    ↓ rust: Tower layers
-    ↓ rust: Trait-based composition
 ```
 
 ---
@@ -132,17 +110,6 @@ impl IntoResponse for AppError {
 | Rc in state | Not Send + Sync | Use Arc |
 | No validation | Security risk | Type-safe extractors |
 | No error response | Bad UX | IntoResponse impl |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Async handlers | Async/await | tokio runtime |
-| Thread-safe state | Shared state | Arc<T>, Arc<RwLock<T>> |
-| Request lifecycle | Extractors | Ownership via From<Request> |
-| Middleware | Tower layers | Trait-based composition |
 
 ---
 

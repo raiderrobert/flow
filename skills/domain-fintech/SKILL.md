@@ -6,9 +6,7 @@ user-invocable: false
 
 # FinTech Domain
 
-> **Layer 3: Domain Constraints**
-
-## Domain Constraints → Design Implications
+## Domain Constraints
 
 | Domain Rule | Design Constraint | Rust Implication |
 |-------------|-------------------|------------------|
@@ -44,26 +42,6 @@ RUST: Arc<T> for sharing, event sourcing pattern
 RULE: Money can't disappear or appear
 WHY: Double-entry accounting principles
 RUST: Transaction types with validated totals
-```
-
----
-
-## Trace Down ↓
-
-From constraints to design (Layer 2):
-
-```
-"Need immutable transaction records"
-    ↓ rust: Model as Value Objects
-    ↓ rust: Use Arc for shared immutable data
-
-"Need precise decimal math"
-    ↓ rust: Newtype for Currency/Amount
-    ↓ rust_decimal: Use Decimal type
-
-"Need transaction boundaries"
-    ↓ rust: RAII for transaction scope
-    ↓ rust: Aggregate boundaries
 ```
 
 ---
@@ -122,17 +100,6 @@ impl Amount {
 | Mutable transaction | Audit trail broken | Immutable + events |
 | String for amount | No validation | Validated newtype |
 | Silent overflow | Money disappears | Checked arithmetic |
-
----
-
-## Trace to Layer 1
-
-| Constraint | Layer 2 Pattern | Layer 1 Implementation |
-|------------|-----------------|------------------------|
-| Immutable records | Event sourcing | Arc<T>, Clone |
-| Transaction scope | Aggregate | Owned children |
-| Precision | Value Object | rust_decimal newtype |
-| Thread-safe sharing | Shared immutable | Arc (not Rc) |
 
 ---
 
