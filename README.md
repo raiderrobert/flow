@@ -4,10 +4,47 @@ A Claude Code plugin with Rust skills, domain expertise, and development workflo
 
 ## Installation
 
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
 ```bash
-claude plugin register-marketplace https://github.com/raiderrobert/flow
-claude plugin install flow@flow-dev
+/plugin marketplace add raiderrobert/flow
 ```
+
+Then install the plugin:
+
+```bash
+/plugin install flow@flow-dev
+```
+
+### Cursor
+
+In Cursor Agent chat:
+
+```text
+/plugin-add flow
+```
+
+### Codex
+
+Tell Codex:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/raiderrobert/flow/refs/heads/main/.codex/INSTALL.md
+```
+
+### OpenCode
+
+Tell OpenCode:
+
+```
+Fetch and follow instructions from https://raw.githubusercontent.com/raiderrobert/flow/refs/heads/main/.opencode/INSTALL.md
+```
+
+### Verify Installation
+
+Start a new session and ask a Rust question. The agent should automatically invoke the relevant flow skill.
 
 ## Skills Catalog
 
@@ -82,12 +119,6 @@ claude plugin install flow@flow-dev
 | core-fix-skill-docs | Internal skill documentation maintenance |
 | meta-cognition-parallel | Three-layer parallel meta-cognition analysis |
 | using-flow | Bootstrapper for discovering flow skills |
-
-## Other Platforms
-
-- **Cursor:** See `.cursor-plugin/plugin.json`
-- **Codex:** See `.codex/INSTALL.md`
-- **OpenCode:** See `.opencode/INSTALL.md`
 
 ## License
 
