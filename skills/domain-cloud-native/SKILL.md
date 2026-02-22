@@ -55,16 +55,16 @@ From constraints to design (Layer 2):
 
 ```
 "Need distributed tracing"
-    ↓ m12-lifecycle: Span lifecycle
+    ↓ rust: Span lifecycle
     ↓ tracing + opentelemetry
 
 "Need graceful shutdown"
-    ↓ m07-concurrency: Signal handling
-    ↓ m12-lifecycle: Connection draining
+    ↓ rust: Signal handling
+    ↓ rust: Connection draining
 
 "Need health checks"
     ↓ domain-web: HTTP endpoints
-    ↓ m06-error-handling: Health status
+    ↓ rust: Health status
 ```
 
 ---
@@ -160,7 +160,7 @@ async fn ready(State(db): State<Arc<DbPool>>) -> StatusCode {
 
 | When | See |
 |------|-----|
-| Async patterns | m07-concurrency |
+| Async patterns | rust |
 | HTTP endpoints | domain-web |
-| Error handling | m13-domain-error |
-| Resource lifecycle | m12-lifecycle |
+| Error handling | rust |
+| Resource lifecycle | rust |

@@ -51,51 +51,34 @@ If you catch yourself thinking any of these, STOP and invoke the skill instead:
 
 When multiple skills could match, use this priority order:
 
-1. **rust-router** -- for ANY Rust question (it routes to specialized skills internally)
+1. **rust** -- for ANY Rust question (ownership, traits, errors, async, design, style)
 2. **Domain-specific skills** -- if the question is clearly about a specific domain (web, CLI, embedded, etc.)
-3. **Module skills (m01-m15)** -- for specific Rust concept questions
-4. **Tooling skills** -- for project tooling and workflow questions
-5. **Meta skills** -- for analysis and meta-cognitive tasks
+3. **Tooling skills** -- for project tooling and workflow questions
+4. **Meta skills** -- for analysis and meta-cognitive tasks
 
 ## Skill Types
 
 | Type | Description | Examples |
 |---|---|---|
-| **Router** | Routes to other skills based on analysis | `rust-router` |
-| **Module** | Deep expertise on a specific Rust concept | `m01-ownership`, `m06-error-handling` |
+| **Core Rust** | Comprehensive Rust guidance | `rust` |
 | **Domain** | Domain-specific Rust patterns and crates | `domain-web`, `domain-cli` |
 | **LSP** | Code analysis using LSP capabilities | `rust-symbol-analyzer`, `rust-call-graph` |
 | **Tooling** | Project tooling and workflow | `diecut-new`, `writing-prs` |
 | **Meta** | Analysis and cognitive frameworks | `meta-cognition-parallel` |
 | **Core** | Internal plugin infrastructure | `core-actionbook`, `core-dynamic-skills` |
 
-## Available Skills (41 total)
+## Available Skills (27 total)
 
-### Rust Core Modules (m01-m15)
+### Rust Core
 
 | Skill | Trigger | Key Signals |
 |---|---|---|
-| `m01-ownership` | Ownership, borrowing, lifetime issues | E0382, E0597, E0506, E0507, E0515, E0716, E0106, `value moved`, `borrowed value does not live long enough`, `cannot move out of`, `'a`, `'static`, `move`, `clone`, `Copy` |
-| `m02-resource` | Smart pointers and resource management | `Box`, `Rc`, `Arc`, `Weak`, `RefCell`, `Cell`, smart pointer, heap allocation, reference counting, RAII, `Drop` |
-| `m03-mutability` | Mutability issues | E0596, E0499, E0502, `cannot borrow as mutable`, `already borrowed as immutable`, `mut`, `&mut`, interior mutability, `Cell`, `RefCell`, `Mutex`, `RwLock` |
-| `m04-zero-cost` | Generics, traits, zero-cost abstraction | E0277, E0308, E0599, generic, trait, `impl`, `dyn`, `where`, monomorphization, static dispatch, dynamic dispatch |
-| `m05-type-driven` | Type-driven design | type state, `PhantomData`, newtype, marker trait, builder pattern, make invalid states unrepresentable, compile-time validation, sealed trait, ZST |
-| `m06-error-handling` | Error handling | `Result`, `Option`, `Error`, `?`, `unwrap`, `expect`, `panic`, `anyhow`, `thiserror`, custom error |
-| `m07-concurrency` | Concurrency and async | E0277 Send/Sync, thread, spawn, channel, `mpsc`, `Mutex`, `RwLock`, `Atomic`, `async`, `await`, `Future`, `tokio`, deadlock |
-| `m09-domain` | Domain modeling | domain model, DDD, entity, value object, aggregate, repository pattern, business rules, validation, invariant |
-| `m10-performance` | Performance optimization | performance, optimization, benchmark, profiling, flamegraph, criterion, slow, fast, allocation, cache, SIMD |
-| `m11-ecosystem` | Crate and ecosystem questions | crate, cargo, dependency, feature flag, workspace, crate recommendation, `Cargo.toml`, `PyO3`, wasm, bindgen |
-| `m12-lifecycle` | Resource lifecycle design | RAII, `Drop`, resource lifecycle, connection pool, lazy initialization, `OnceCell`, `OnceLock`, cleanup, scope guard |
-| `m13-domain-error` | Domain error handling design | domain error, error categorization, recovery strategy, retry, fallback, circuit breaker, graceful degradation |
-| `m14-mental-model` | Learning Rust concepts | mental model, how to think about ownership, understanding borrow checker, visualizing memory layout, analogy, explain like I'm, coming from Java/Python |
-| `m15-anti-pattern` | Code review for anti-patterns | anti-pattern, common mistake, pitfall, code smell, bad practice, code review, idiomatic way, clone everywhere, unwrap in production |
+| `rust` | **ALL Rust questions** (highest priority) | Any Rust question: ownership, borrowing, lifetimes, traits, generics, error handling, async, concurrency, Send/Sync, smart pointers, type-driven design, domain modeling, performance, ecosystem, anti-patterns, code style, mental models. All E0xxx compiler errors. |
 
 ### Rust Tooling
 
 | Skill | Trigger | Key Signals |
 |---|---|---|
-| `rust-router` | **ALL Rust questions** (highest priority) | Any Rust question including errors, design, coding, comparisons, best practices |
-| `coding-guidelines` | Rust code style and best practices | naming, formatting, clippy, rustfmt, lint, code style, naming convention |
 | `rust-learner` | Rust version and crate info | latest version, changelog, Rust 1.x, crate info, crates.io, docs.rs, `cargo add` |
 | `rust-daily` | Rust news and reports | Rust news, daily report, weekly report, monthly report, what's new in Rust |
 | `rust-skill-creator` | Creating new skills for crates/stdlib | create skill, document crate, skill for, stdlib documentation |

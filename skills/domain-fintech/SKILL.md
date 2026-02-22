@@ -54,16 +54,16 @@ From constraints to design (Layer 2):
 
 ```
 "Need immutable transaction records"
-    ↓ m09-domain: Model as Value Objects
-    ↓ m01-ownership: Use Arc for shared immutable data
+    ↓ rust: Model as Value Objects
+    ↓ rust: Use Arc for shared immutable data
 
 "Need precise decimal math"
-    ↓ m05-type-driven: Newtype for Currency/Amount
+    ↓ rust: Newtype for Currency/Amount
     ↓ rust_decimal: Use Decimal type
 
 "Need transaction boundaries"
-    ↓ m12-lifecycle: RAII for transaction scope
-    ↓ m09-domain: Aggregate boundaries
+    ↓ rust: RAII for transaction scope
+    ↓ rust: Aggregate boundaries
 ```
 
 ---
@@ -140,7 +140,7 @@ impl Amount {
 
 | When | See |
 |------|-----|
-| Value Object design | m09-domain |
-| Ownership for immutable | m01-ownership |
-| Arc for sharing | m02-resource |
-| Error handling | m13-domain-error |
+| Value Object design | rust |
+| Ownership for immutable | rust |
+| Arc for sharing | rust |
+| Error handling | rust |

@@ -55,15 +55,15 @@ From constraints to design (Layer 2):
 
 ```
 "Need efficient data pipelines"
-    ↓ m10-performance: Streaming, batching
+    ↓ rust: Streaming, batching
     ↓ polars: Lazy evaluation
 
 "Need GPU inference"
-    ↓ m07-concurrency: Async data loading
+    ↓ rust: Async data loading
     ↓ candle/tch-rs: CUDA backend
 
 "Need model loading"
-    ↓ m12-lifecycle: Lazy init, caching
+    ↓ rust: Lazy init, caching
     ↓ tract: ONNX runtime
 ```
 
@@ -175,7 +175,7 @@ async fn batch_predict(inputs: Vec<Vec<f32>>, batch_size: usize) -> Vec<Vec<f32>
 
 | When | See |
 |------|-----|
-| Performance | m10-performance |
-| Lazy initialization | m12-lifecycle |
-| Async patterns | m07-concurrency |
-| Memory efficiency | m01-ownership |
+| Performance | rust |
+| Lazy initialization | rust |
+| Async patterns | rust |
+| Memory efficiency | rust |

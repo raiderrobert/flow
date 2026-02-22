@@ -55,15 +55,15 @@ From constraints to design (Layer 2):
 
 ```
 "Need offline-first design"
-    ↓ m12-lifecycle: Local buffer with persistence
-    ↓ m13-domain-error: Retry with backoff
+    ↓ rust: Local buffer with persistence
+    ↓ rust: Retry with backoff
 
 "Need power efficiency"
     ↓ domain-embedded: no_std patterns
-    ↓ m10-performance: Minimal allocations
+    ↓ rust: Minimal allocations
 
 "Need reliable messaging"
-    ↓ m07-concurrency: Async with timeout
+    ↓ rust: Async with timeout
     ↓ MQTT: QoS levels
 ```
 
@@ -163,6 +163,6 @@ async fn run_mqtt() -> anyhow::Result<()> {
 | When | See |
 |------|-----|
 | Embedded patterns | domain-embedded |
-| Async patterns | m07-concurrency |
-| Error recovery | m13-domain-error |
-| Performance | m10-performance |
+| Async patterns | rust |
+| Error recovery | rust |
+| Performance | rust |

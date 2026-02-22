@@ -63,16 +63,16 @@ From constraints to design (Layer 2):
 
 ```
 "Need no_std compatible data structures"
-    ↓ m02-resource: heapless collections
+    ↓ rust: heapless collections
     ↓ Static sizing: heapless::Vec<T, N>
 
 "Need interrupt-safe state"
-    ↓ m03-mutability: Mutex<RefCell<Option<T>>>
-    ↓ m07-concurrency: Critical sections
+    ↓ rust: Mutex<RefCell<Option<T>>>
+    ↓ rust: Critical sections
 
 "Need peripheral ownership"
-    ↓ m01-ownership: Singleton pattern
-    ↓ m12-lifecycle: RAII for hardware
+    ↓ rust: Singleton pattern
+    ↓ rust: RAII for hardware
 ```
 
 ---
@@ -172,7 +172,7 @@ fn main() -> ! {
 
 | When | See |
 |------|-----|
-| Static memory | m02-resource |
-| Interior mutability | m03-mutability |
-| Interrupt patterns | m07-concurrency |
+| Static memory | rust |
+| Interior mutability | rust |
+| Interrupt patterns | rust |
 | Unsafe for hardware | unsafe-checker |

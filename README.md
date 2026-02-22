@@ -52,27 +52,12 @@ Start a new session and ask a Rust question. The agent should automatically invo
 
 | Skill | Description |
 |-------|-------------|
-| m01-ownership | Ownership, borrowing, and lifetime issues |
-| m02-resource | Smart pointers and resource management |
-| m03-mutability | Mutability and interior mutability patterns |
-| m04-zero-cost | Generics, traits, and zero-cost abstractions |
-| m05-type-driven | Type-driven design and compile-time validation |
-| m06-error-handling | Error handling with Result, Option, and crates |
-| m07-concurrency | Concurrency, async, and thread safety |
-| m09-domain | Domain modeling and domain-driven design |
-| m10-performance | Performance optimization and benchmarking |
-| m11-ecosystem | Crate integration and ecosystem guidance |
-| m12-lifecycle | Resource lifecycles, RAII, and cleanup patterns |
-| m13-domain-error | Domain error hierarchies and recovery strategies |
-| m14-mental-model | Mental models for learning Rust concepts |
-| m15-anti-pattern | Anti-patterns, pitfalls, and code smells |
+| rust | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
 
 ### Rust Tooling
 
 | Skill | Description |
 |-------|-------------|
-| coding-guidelines | Rust code style and best practices |
-| rust-router | Routes all Rust questions to skills |
 | rust-learner | Rust version and crate information lookup |
 | rust-daily | Daily Rust learning and practice |
 | rust-skill-creator | Create skills from crate or std docs |

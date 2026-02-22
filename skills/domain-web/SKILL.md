@@ -55,16 +55,16 @@ From constraints to design (Layer 2):
 
 ```
 "Need shared application state"
-    ↓ m07-concurrency: Use Arc for thread-safe sharing
-    ↓ m02-resource: Arc<RwLock<T>> for mutable state
+    ↓ rust: Use Arc for thread-safe sharing
+    ↓ rust: Arc<RwLock<T>> for mutable state
 
 "Need request validation"
-    ↓ m05-type-driven: Validated extractors
-    ↓ m06-error-handling: IntoResponse for errors
+    ↓ rust: Validated extractors
+    ↓ rust: IntoResponse for errors
 
 "Need middleware stack"
-    ↓ m12-lifecycle: Tower layers
-    ↓ m04-zero-cost: Trait-based composition
+    ↓ rust: Tower layers
+    ↓ rust: Trait-based composition
 ```
 
 ---
@@ -150,7 +150,7 @@ impl IntoResponse for AppError {
 
 | When | See |
 |------|-----|
-| Async patterns | m07-concurrency |
-| State management | m02-resource |
-| Error handling | m06-error-handling |
-| Middleware design | m12-lifecycle |
+| Async patterns | rust |
+| State management | rust |
+| Error handling | rust |
+| Middleware design | rust |

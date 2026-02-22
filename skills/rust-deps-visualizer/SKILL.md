@@ -109,6 +109,6 @@ my-project v0.1.0
 
 | When | See |
 |------|-----|
-| Crate selection advice | m11-ecosystem |
-| Workspace management | m11-ecosystem |
-| Feature flag decisions | m11-ecosystem |
+| Crate selection advice | rust |
+| Workspace management | rust |
+| Feature flag decisions | rust |

@@ -55,15 +55,15 @@ From constraints to design (Layer 2):
 
 ```
 "Need argument parsing"
-    ↓ m05-type-driven: Derive structs for args
+    ↓ rust: Derive structs for args
     ↓ clap: #[derive(Parser)]
 
 "Need config layering"
-    ↓ m09-domain: Config as domain object
+    ↓ rust: Config as domain object
     ↓ figment/config: Layer sources
 
 "Need progress display"
-    ↓ m12-lifecycle: Progress bar as RAII
+    ↓ rust: Progress bar as RAII
     ↓ indicatif: ProgressBar
 ```
 
@@ -155,7 +155,7 @@ fn main() -> anyhow::Result<()> {
 
 | When | See |
 |------|-----|
-| Error handling | m06-error-handling |
-| Type-driven args | m05-type-driven |
-| Progress lifecycle | m12-lifecycle |
-| Async CLI | m07-concurrency |
+| Error handling | rust |
+| Type-driven args | rust |
+| Progress lifecycle | rust |
+| Async CLI | rust |
