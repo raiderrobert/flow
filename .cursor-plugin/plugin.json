@@ -1,0 +1,17 @@
+{
+  "name": "flow",
+  "displayName": "Flow",
+  "description": "Rust skills, domain expertise, and development workflows",
+  "version": "0.1.0",
+  "author": {
+    "name": "raiderrobert"
+  },
+  "homepage": "https://github.com/raiderrobert/flow",
+  "repository": "https://github.com/raiderrobert/flow",
+  "license": "MIT",
+  "keywords": ["skills", "rust", "domain", "workflows", "diecut"],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "hooks": "./hooks/hooks.json"
+}
