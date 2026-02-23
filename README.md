@@ -48,61 +48,23 @@ Start a new session and ask a Rust question. The agent should automatically invo
 
 ## Skills Catalog
 
-### Rust Core
+### Rust
 
 | Skill | Description |
 |-------|-------------|
 | rust | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
-
-### Rust Tooling
-
-| Skill | Description |
-|-------|-------------|
+| rust-domain | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
+| rust-lsp | Code analysis, navigation, and refactoring via LSP and cargo tools |
 | rust-learner | Rust version and crate information lookup |
-| rust-daily | Daily Rust learning and practice |
-| rust-skill-creator | Create skills from crate or std docs |
 | unsafe-checker | Audit unsafe code blocks for soundness |
-
-### Rust LSP
-
-| Skill | Description |
-|-------|-------------|
-| rust-symbol-analyzer | Analyze project structure via LSP symbols |
-| rust-trait-explorer | Explore trait implementations via LSP |
-| rust-code-navigator | Navigate definitions and references via LSP |
-| rust-call-graph | Visualize function call hierarchies |
-| rust-deps-visualizer | Visualize project dependency graphs as ASCII |
-| rust-refactor-helper | Safe refactoring with LSP analysis |
-
-### Domain
-
-| Skill | Description |
-|-------|-------------|
-| domain-web | Building web services and REST APIs |
-| domain-cli | Building CLI tools and TUI applications |
-| domain-cloud-native | Cloud-native, Kubernetes, and microservices |
-| domain-embedded | Embedded and no_std Rust development |
-| domain-fintech | Fintech, trading, and financial applications |
-| domain-iot | IoT, sensors, and edge computing |
-| domain-ml | Machine learning and AI in Rust |
 
 ### Tooling
 
 | Skill | Description |
 |-------|-------------|
-| diecut-new | Generate projects from diecut templates |
-| diecut-create-template | Create new diecut template repositories |
-| writing-prs | Write pull request titles and descriptions |
-
-### Meta / Core
-
-| Skill | Description |
-|-------|-------------|
-| core-actionbook | Internal action orchestration tool |
-| core-agent-browser | Internal agent browsing tool |
-| core-dynamic-skills | Dynamic skill loading and management |
-| core-fix-skill-docs | Internal skill documentation maintenance |
-| meta-cognition-parallel | Three-layer parallel meta-cognition analysis |
+| diecut | Project scaffolding and template creation with diecut |
+| core-browser | Browser automation with actionbook and agent-browser |
+| core-skills | Dynamic skill creation, syncing, and maintenance |
 
 ## License
 
