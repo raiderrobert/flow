@@ -7,30 +7,30 @@ allowed-tools: ["Read", "Glob", "Grep", "Edit", "Bash"]
 
 # Rust LSP Toolkit
 
-Unified skill for Rust code analysis, navigation, and refactoring using Language Server Protocol and cargo tools.
+Unified skill for Rust code analysis, navigation, and refactoring using Grep, Glob, Read, Bash, and cargo tools.
 
-## Supported LSP Operations
+## Analysis Techniques
 
-| Operation | Use When |
-|-----------|----------|
-| `documentSymbol` | Analyzing a single file's structure |
-| `goToDefinition` | Finding where something is defined |
-| `findReferences` | Finding all usages of a symbol |
-| `hover` | Getting type info and documentation |
-| `getDiagnostics` | Checking for compiler errors |
+| Technique | Tool | Use When |
+|-----------|------|----------|
+| Symbol search | `Grep("^(pub )?(struct\|fn\|trait) Name")` | Finding definitions |
+| Find references | `Grep("SymbolName", glob: "**/*.rs")` | Finding all usages |
+| File structure | `Grep` + `Read` on target file | Analyzing a single file |
+| Type info | `Grep` definition + `Read` context | Getting type signatures and docs |
+| Compiler diagnostics | `Bash("cargo check 2>&1")` | Checking for errors |
 
-> **Note:** For advanced analysis (workspace-wide symbol search, trait implementation discovery, call graphs), this skill supplements LSP with `Grep` and `Glob` tools.
+> **Primary tools:** Grep and Glob for search, Read for context, Bash for cargo commands.
 
 ## Capability Routing
 
 | Task | Reference | Primary Tools |
 |------|-----------|---------------|
-| Project structure, list symbols | `./symbol-analyzer.md` | Glob + documentSymbol |
-| Trait implementations | `./trait-explorer.md` | Grep + findReferences |
-| Navigate definitions/references | `./code-navigator.md` | goToDefinition, findReferences, hover |
-| Call hierarchy visualization | `./call-graph.md` | Grep + findReferences |
-| Dependency tree visualization | `./deps-visualizer.md` | cargo tree, cargo metadata |
-| Safe refactoring | `./refactor-helper.md` | findReferences, hover, Edit |
+| Project structure, list symbols | `./symbol-analyzer.md` | Glob + Grep + Read |
+| Trait implementations | `./trait-explorer.md` | Grep + Read |
+| Navigate definitions/references | `./code-navigator.md` | Grep + Read |
+| Call hierarchy visualization | `./call-graph.md` | Grep + Read |
+| Dependency tree visualization | `./deps-visualizer.md` | Bash (cargo tree, cargo metadata) |
+| Safe refactoring | `./refactor-helper.md` | Grep + Read + Edit |
 
 ## Reference Files
 

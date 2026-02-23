@@ -41,15 +41,15 @@ User: "Who implements the Handler trait?"
     |
     v
 [1] Find trait definition
-    Grep("trait Handler") or LSP(goToDefinition)
+    Grep("trait Handler")
     |
     v
 [2] Get implementations
     Grep("impl.*Handler for")
     |
     v
-[3] For each impl, get details
-    LSP(documentSymbol) for methods
+[3] For each impl, Read the file and extract method signatures
+    Grep("fn \w+" within impl block)
     |
     v
 [4] Generate implementation map

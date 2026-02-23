@@ -20,27 +20,24 @@ Analyze project structure by examining symbols across your Rust codebase.
 Get all symbols in a file with their hierarchy.
 
 ```
-LSP(
-  operation: "documentSymbol",
-  filePath: "src/lib.rs",
-  line: 1,
-  character: 1
-)
+Grep("^(pub )?(struct|enum|trait|fn|impl|mod|const|type) ", filePath: "src/lib.rs")
 ```
 
-**Returns:** Nested structure of modules, structs, functions, etc.
+Then Read the file to understand the full hierarchy and nesting.
+
+**Returns:** Categorized list of modules, structs, functions, etc.
 
 ### 2. Project-Wide Symbol Search
 
-Find symbols across the workspace using Glob + documentSymbol.
+Find symbols across the workspace using Glob + Grep.
 
 ```
 1. Glob("**/*.rs") → find all Rust files
-2. LSP(documentSymbol) on key files (lib.rs, main.rs, mod.rs files)
-3. For specific symbol types, use Grep:
+2. Grep key patterns on entry files (lib.rs, main.rs, mod.rs):
    - Structs: Grep("^pub struct \w+")
    - Traits: Grep("^pub trait \w+")
    - Functions: Grep("^pub fn \w+")
+3. Read each entry file for module structure and re-exports
 ```
 
 ## Workflow
@@ -54,7 +51,7 @@ User: "What's the structure of this project?"
     |
     v
 [2] Get symbols from each key file
-    LSP(documentSymbol) for lib.rs, main.rs
+    Grep("^(pub )?(struct|enum|trait|fn|impl|mod) ") on lib.rs, main.rs
     |
     v
 [3] Categorize by type
@@ -117,22 +114,22 @@ tests/
 
 ## Symbol Types
 
-| Type | LSP Kind |
-|------|----------|
-| Module | Module |
-| Struct | Struct |
-| Enum | Enum |
-| Trait | Interface |
-| Function | Function |
-| Method | Method |
-| Constant | Constant |
-| Field | Field |
+| Type | Grep Pattern |
+|------|-------------|
+| Module | `^(pub )?mod \w+` |
+| Struct | `^(pub )?struct \w+` |
+| Enum | `^(pub )?enum \w+` |
+| Trait | `^(pub )?trait \w+` |
+| Function | `^(pub )?(async )?fn \w+` |
+| Method | `fn \w+\(&(mut )?self` |
+| Constant | `^(pub )?const \w+` |
+| Field | Read struct body after locating it |
 
 ## Common Queries
 
 | User Says | Analysis |
 |-----------|----------|
-| "What structs are in this project?" | Grep("^pub struct") + documentSymbol |
-| "Show me src/lib.rs structure" | documentSymbol |
-| "Find all async functions" | Grep("async fn") |
-| "List public API" | documentSymbol + pub filter |
+| "What structs are in this project?" | Grep("^pub struct") across **/*.rs |
+| "Show me src/lib.rs structure" | Grep + Read on src/lib.rs |
+| "Find all async functions" | Grep("async fn") across **/*.rs |
+| "List public API" | Grep("^pub ") + Read for context |
