@@ -49,7 +49,7 @@ cargo metadata --format-version=1 --no-deps 2>/dev/null
 **Step 2:** Get full dependency tree
 
 ```bash
-cargo tree --depth=${DEPTH:-3} ${FEATURES:+--features} 2>/dev/null
+cargo tree --depth 3 2>/dev/null
 ```
 
 **Step 3:** Format as ASCII art tree

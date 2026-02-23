@@ -72,9 +72,11 @@ RUST: ONNX via tract or candle
 use std::sync::OnceLock;
 use tract_onnx::prelude::*;
 
-static MODEL: OnceLock<SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dyn TypedOp>>>> = OnceLock::new();
+type OnnxModel = SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dyn TypedOp>>>;
 
-fn get_model() -> &'static SimplePlan<...> {
+static MODEL: OnceLock<OnnxModel> = OnceLock::new();
+
+fn get_model() -> &'static OnnxModel {
     MODEL.get_or_init(|| {
         tract_onnx::onnx()
             .model_for_path("model.onnx")
@@ -104,8 +106,9 @@ async fn batch_predict(inputs: Vec<Vec<f32>>, batch_size: usize) -> Vec<Vec<f32>
         // Stack inputs into batch tensor
         let batch_tensor = stack_inputs(batch);
 
-        // Run inference on batch
-        let batch_output = model.run(batch_tensor).await;
+        // Run inference on batch (tract's run() is synchronous;
+        // use spawn_blocking if called from async context)
+        let batch_output = model.run(batch_tensor);
 
         // Unstack results
         results.extend(unstack_outputs(batch_output));

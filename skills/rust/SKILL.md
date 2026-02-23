@@ -94,21 +94,14 @@ When domain keywords are present alongside a Rust question, also load the domain
 
 | Domain Keywords | Also Load |
 |-----------------|-----------|
-| Web API, HTTP, axum, actix, handler | `domain-web` |
-| trading, payment, decimal, currency | `domain-fintech` |
-| CLI, terminal, clap, TUI | `domain-cli` |
-| kubernetes, gRPC, microservice | `domain-cloud-native` |
-| embedded, no_std, MCU, firmware | `domain-embedded` |
-| sensor, MQTT, IoT, telemetry | `domain-iot` |
-| tensor, model, inference, ML | `domain-ml` |
+| Web, HTTP, axum, CLI, clap, kubernetes, gRPC, embedded, no_std, fintech, trading, IoT, MQTT, ML, tensor | `rust-domain` skill |
 
 ## Functional Routing
 
 | Pattern | Route To |
 |---------|----------|
 | unsafe, FFI, extern, raw pointer, transmute | `unsafe-checker` skill |
-| latest version, changelog, crate info | `rust-learner` skill |
-| project structure, list structs/traits | `rust-symbol-analyzer` skill |
+| project structure, list structs/traits, call graph, refactor | `rust-lsp` skill |
 
 ## Quick Decision Trees
 

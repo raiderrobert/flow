@@ -1,7 +1,6 @@
 ---
 name: rust-domain
 description: "Use when building domain-specific Rust applications. Keywords: web server, HTTP, REST API, GraphQL, WebSocket, axum, actix, tower, CLI, command line, terminal, clap, TUI, ratatui, kubernetes, k8s, docker, grpc, tonic, microservice, cloud, embedded, no_std, MCU, ARM, firmware, embassy, RTIC, fintech, trading, decimal, currency, financial, ledger, IoT, sensor, MQTT, edge computing, machine learning, ML, AI, tensor, model, inference, candle, burn"
-globs: ["**/Cargo.toml"]
 user-invocable: false
 ---
 

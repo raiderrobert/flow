@@ -65,7 +65,7 @@
 | No `get_` prefix | `fn name()` not `fn get_name()` |
 | Iterator convention | `iter()` / `iter_mut()` / `into_iter()` |
 | Conversion naming | `as_` (cheap &), `to_` (expensive), `into_` (ownership) |
-| Static var prefix | `G_CONFIG` for `static`, no prefix for `const` |
+| Static var naming | `SCREAMING_SNAKE_CASE` same as `const` |
 | Naming format | snake_case (fn/var), CamelCase (type), SCREAMING_CASE (const) |
 
 ### Data Types

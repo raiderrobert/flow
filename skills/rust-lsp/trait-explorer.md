@@ -12,25 +12,25 @@ Discover trait implementations and understand polymorphic designs.
 - Find all implementors of Handler trait
 - Find all traits implemented by MyStruct
 
-## LSP Operations
+## Approach
 
-### Go to Implementation
+### Find Trait Implementors
 
-Find all implementations of a trait.
+Use Grep to search for `impl TraitName for` patterns across the codebase.
 
 ```
-LSP(
-  operation: "goToImplementation",
-  filePath: "src/traits.rs",
-  line: 10,
-  character: 11
-)
+Grep("impl\s+(\w+\s+)?TraitName\s+for")
 ```
 
-**Use when:**
-- Trait name is known
-- Want to find all implementors
-- Understanding polymorphic code
+Then use `findReferences` on the trait definition for additional coverage.
+
+### Find Traits for a Type
+
+Search for all `impl` blocks for a given type.
+
+```
+Grep("impl\s+(\w+\s+)?(\w+::)*\w+\s+for\s+TypeName")
+```
 
 ## Workflow
 
@@ -41,11 +41,11 @@ User: "Who implements the Handler trait?"
     |
     v
 [1] Find trait definition
-    LSP(goToDefinition) or workspaceSymbol
+    Grep("trait Handler") or LSP(goToDefinition)
     |
     v
 [2] Get implementations
-    LSP(goToImplementation)
+    Grep("impl.*Handler for")
     |
     v
 [3] For each impl, get details
@@ -65,7 +65,7 @@ User: "What traits does MyStruct implement?"
     |
     v
 [2] Search for "impl * for MyStruct"
-    Grep pattern matching
+    Grep("impl.*for MyStruct")
     |
     v
 [3] Get trait details for each
@@ -115,7 +115,7 @@ User: "What traits does MyStruct implement?"
 
 | User Says | Action |
 |-----------|--------|
-| "Who implements X?" | goToImplementation on trait |
-| "What traits does Y impl?" | Grep for `impl * for Y` |
+| "Who implements X?" | Grep("impl.*X for") + findReferences on trait |
+| "What traits does Y impl?" | Grep("impl.*for Y") |
 | "Show trait hierarchy" | Find super-traits recursively |
 | "Is X: Send + Sync?" | Check std trait impls |

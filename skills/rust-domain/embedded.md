@@ -1,9 +1,8 @@
 # Embedded Domain
 
-## Project Context (Auto-Injected)
+## Project Context
 
-**Target configuration:**
-!`cat .cargo/config.toml 2>/dev/null || echo "No .cargo/config.toml found"`
+When working on an embedded project, check `.cargo/config.toml` for target configuration.
 
 ---
 
@@ -70,7 +69,7 @@ RUST: HAL takes ownership, singletons
 | Collections | heapless |
 | HAL traits | embedded-hal |
 | Logging | defmt |
-| Flash/debug | probe-run |
+| Flash/debug | probe-rs |
 
 ## Design Patterns
 

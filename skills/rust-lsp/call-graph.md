@@ -1,6 +1,6 @@
 # Call Graph
 
-Visualize function call relationships using LSP call hierarchy.
+Visualize function call relationships using Grep-based analysis and LSP references.
 
 ## Usage
 
@@ -12,40 +12,35 @@ Visualize function call relationships using LSP call hierarchy.
 - `--depth N`: How many levels to traverse (default: 3)
 - `--direction`: `in` (callers), `out` (callees), `both`
 
-## LSP Operations
+## Approach
 
-### 1. Prepare Call Hierarchy
+### Finding Callers (Incoming Calls)
+
+Use `findReferences` on the function to find all call sites:
 
 ```
 LSP(
-  operation: "prepareCallHierarchy",
+  operation: "findReferences",
   filePath: "src/handler.rs",
   line: 45,
   character: 8
 )
 ```
 
-### 2. Incoming Calls (Who calls this?)
+Or supplement with Grep for broader coverage:
 
 ```
-LSP(
-  operation: "incomingCalls",
-  filePath: "src/handler.rs",
-  line: 45,
-  character: 8
-)
+Grep("function_name\(")
 ```
 
-### 3. Outgoing Calls (What does this call?)
+### Finding Callees (Outgoing Calls)
 
-```
-LSP(
-  operation: "outgoingCalls",
-  filePath: "src/handler.rs",
-  line: 45,
-  character: 8
-)
-```
+Read the function body and search for function calls within it:
+
+1. Use `goToDefinition` to find the function
+2. Read the function body
+3. Identify called functions via pattern matching
+4. Recursively expand to desired depth
 
 ## Workflow
 
@@ -54,25 +49,21 @@ User: "Show call graph for process_request"
     |
     v
 [1] Find function location
-    LSP(workspaceSymbol) or Grep
+    Grep("fn process_request") or goToDefinition
     |
     v
-[2] Prepare call hierarchy
-    LSP(prepareCallHierarchy)
+[2] Get incoming calls (callers)
+    LSP(findReferences) or Grep("process_request(")
     |
     v
-[3] Get incoming calls (callers)
-    LSP(incomingCalls)
+[3] Get outgoing calls (callees)
+    Read function body, identify called functions
     |
     v
-[4] Get outgoing calls (callees)
-    LSP(outgoingCalls)
+[4] Recursively expand to depth N
     |
     v
-[5] Recursively expand to depth N
-    |
-    v
-[6] Generate ASCII visualization
+[5] Generate ASCII visualization
 ```
 
 ## Output Format
