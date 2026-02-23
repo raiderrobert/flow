@@ -48,23 +48,13 @@ Start a new session and ask a Rust question. The agent should automatically invo
 
 ## Skills Catalog
 
-### Rust
-
 | Skill | Description |
 |-------|-------------|
 | rust | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
 | rust-domain | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
 | rust-lsp | Code analysis, navigation, and refactoring via LSP and cargo tools |
-| rust-learner | Rust version and crate information lookup |
 | unsafe-checker | Audit unsafe code blocks for soundness |
-
-### Tooling
-
-| Skill | Description |
-|-------|-------------|
 | diecut | Project scaffolding and template creation with diecut |
-| core-browser | Browser automation with actionbook and agent-browser |
-| core-skills | Dynamic skill creation, syncing, and maintenance |
 
 ## License
 
