@@ -54,9 +54,9 @@ Use ? → Need context?
 
 | Pattern | When | Implementation |
 |---------|------|----------------|
-| Retry | Transient failures | exponential backoff (`tokio-retry`, `backoff`) |
+| Retry | Transient failures | exponential backoff (`backon`) |
 | Fallback | Degraded mode | cached/default value |
-| Circuit Breaker | Cascading failures | `failsafe-rs` |
+| Circuit Breaker | Cascading failures | `tower` (circuit breaker middleware) |
 | Timeout | Slow operations | `tokio::time::timeout` |
 | Bulkhead | Isolation | separate thread pools |
 

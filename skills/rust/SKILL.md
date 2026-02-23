@@ -173,8 +173,13 @@ Is the type known at compile time?
 |------------|--------|-------|
 | `lazy_static!` | `std::sync::OnceLock` | 1.70 |
 | `once_cell::Lazy` | `std::sync::LazyLock` | 1.80 |
-| `std::sync::mpsc` | `crossbeam::channel` | - |
 | `failure`/`error-chain` | `thiserror`/`anyhow` | - |
 | `try!()` | `?` operator | 2018 |
 | `extern crate` | Just `use` | 2018 |
 | `#[macro_use]` | Explicit import | 2018 |
+
+### Preferences
+
+| Standard | Preferred | Why |
+|----------|-----------|-----|
+| `std::sync::mpsc` | `crossbeam::channel` | MPMC support, select! macro |

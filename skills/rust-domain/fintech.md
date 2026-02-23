@@ -75,7 +75,7 @@ impl Amount {
         if self.currency != other.currency {
             return Err(CurrencyMismatch);
         }
-        Ok(Amount::new(self.value + other.value, self.currency))
+        Ok(Amount::new(self.value + other.value, self.currency.clone()))
     }
 }
 ```

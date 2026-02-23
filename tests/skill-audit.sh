@@ -66,6 +66,112 @@ else
   check "diecut/SKILL.md has globs for auto-triggering" "fail"
 fi
 
+# ---------- Test 7: No findReferences as tool call in rust-lsp ----------
+if grep -r 'findReferences' skills/rust-lsp/ >/dev/null 2>&1; then
+  check "No findReferences in rust-lsp/" "fail"
+else
+  check "No findReferences in rust-lsp/" "pass"
+fi
+
+# ---------- Test 8: No "Language Server Protocol" in rust-lsp ref files ----------
+if grep -r 'Language Server Protocol' skills/rust-lsp/ --include='*.md' | grep -v 'SKILL.md' | grep -q .; then
+  check "No 'Language Server Protocol' in rust-lsp ref files" "fail"
+else
+  check "No 'Language Server Protocol' in rust-lsp ref files" "pass"
+fi
+
+# ---------- Test 9: No "LSP references" in rust-lsp ----------
+if grep -r 'LSP references' skills/rust-lsp/ >/dev/null 2>&1; then
+  check "No 'LSP references' in rust-lsp/" "fail"
+else
+  check "No 'LSP references' in rust-lsp/" "pass"
+fi
+
+# ---------- Test 10: std::sync::mpsc not in Deprecated table ----------
+# Check that mpsc is NOT in the Deprecated Patterns section (between "### Deprecated" and next "###")
+if sed -n '/### Deprecated/,/^###/p' skills/rust/SKILL.md | grep -q 'mpsc'; then
+  check "std::sync::mpsc not in Deprecated table" "fail"
+else
+  check "std::sync::mpsc not in Deprecated table" "pass"
+fi
+
+# ---------- Test 11: tokio-retry not recommended without qualification ----------
+if grep 'tokio-retry' skills/rust/ref/error-handling.md >/dev/null 2>&1; then
+  check "tokio-retry not recommended without qualification" "fail"
+else
+  check "tokio-retry not recommended without qualification" "pass"
+fi
+
+# ---------- Test 12: No failsafe-rs without alternative ----------
+if grep 'failsafe' skills/rust/ref/error-handling.md >/dev/null 2>&1; then
+  check "No failsafe-rs in error-handling.md" "fail"
+else
+  check "No failsafe-rs in error-handling.md" "pass"
+fi
+
+# ---------- Test 13: No into_shape in ml.md ----------
+if grep 'into_shape' skills/rust-domain/ml.md >/dev/null 2>&1; then
+  check "No into_shape in ml.md" "fail"
+else
+  check "No into_shape in ml.md" "pass"
+fi
+
+# ---------- Test 14: No bare warp recommendation ----------
+if grep '^| warp ' skills/rust-domain/web.md >/dev/null 2>&1; then
+  check "No bare warp recommendation in web.md" "fail"
+else
+  check "No bare warp recommendation in web.md" "pass"
+fi
+
+# ---------- Test 15: fintech.md Amount::add uses clone ----------
+if grep 'self\.currency)' skills/rust-domain/fintech.md | grep -v 'clone()' | grep -q .; then
+  check "fintech.md Amount::add uses clone on currency" "fail"
+else
+  check "fintech.md Amount::add uses clone on currency" "pass"
+fi
+
+# ---------- Test 16: iot.md clones client before spawn ----------
+if grep -q 'client\.clone()' skills/rust-domain/iot.md; then
+  check "iot.md clones client before spawn" "pass"
+else
+  check "iot.md clones client before spawn" "fail"
+fi
+
+# ---------- Test 17: cloud-native.md handles SIGTERM ----------
+if grep -q 'SignalKind::terminate' skills/rust-domain/cloud-native.md; then
+  check "cloud-native.md handles SIGTERM" "pass"
+else
+  check "cloud-native.md handles SIGTERM" "fail"
+fi
+
+# ---------- Test 18: cli.md recommends doc comments not #[arg(help)] ----------
+if grep 'arg(help' skills/rust-domain/cli.md >/dev/null 2>&1; then
+  check "cli.md recommends doc comments not arg(help)" "fail"
+else
+  check "cli.md recommends doc comments not arg(help)" "pass"
+fi
+
+# ---------- Test 19: ffi-patterns.md Pattern 4 has catch_unwind import ----------
+if grep -q 'use std::panic.*catch_unwind' skills/unsafe-checker/examples/ffi-patterns.md; then
+  check "ffi-patterns.md Pattern 4 has catch_unwind import" "pass"
+else
+  check "ffi-patterns.md Pattern 4 has catch_unwind import" "fail"
+fi
+
+# ---------- Test 20: ffi-04 no dangling pointer in get_last_error ----------
+if grep 'as_ptr.*c_char' skills/unsafe-checker/rules/ffi-04-panic-boundary.md >/dev/null 2>&1; then
+  check "ffi-04 no dangling pointer in get_last_error" "fail"
+else
+  check "ffi-04 no dangling pointer in get_last_error" "pass"
+fi
+
+# ---------- Test 21: mem-06 no nightly label ----------
+if grep -i 'nightly' skills/unsafe-checker/rules/mem-06-maybeuninit.md >/dev/null 2>&1; then
+  check "mem-06 no nightly label" "fail"
+else
+  check "mem-06 no nightly label" "pass"
+fi
+
 # ---------- Summary ----------
 TOTAL=$((PASS + FAIL))
 echo ""

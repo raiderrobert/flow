@@ -1,6 +1,6 @@
 # Call Graph
 
-Visualize function call relationships using Grep-based analysis and LSP references.
+Visualize function call relationships using Grep-based analysis.
 
 ## Usage
 

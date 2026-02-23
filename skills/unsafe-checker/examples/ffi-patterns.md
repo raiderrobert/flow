@@ -214,7 +214,9 @@ impl Drop for Connection<'_> {
 ## Pattern 4: Error Handling Across FFI
 
 ```rust
-use std::os::raw::c_int;
+use std::ffi::CString;
+use std::os::raw::{c_char, c_int};
+use std::panic::{catch_unwind, AssertUnwindSafe};
 
 // Error codes for C
 pub const SUCCESS: c_int = 0;

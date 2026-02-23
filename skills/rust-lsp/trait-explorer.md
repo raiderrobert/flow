@@ -22,7 +22,7 @@ Use Grep to search for `impl TraitName for` patterns across the codebase.
 Grep("impl\s+(\w+\s+)?TraitName\s+for")
 ```
 
-Then use `findReferences` on the trait definition for additional coverage.
+Then Read each matched impl block for full context.
 
 ### Find Traits for a Type
 
@@ -115,7 +115,7 @@ User: "What traits does MyStruct implement?"
 
 | User Says | Action |
 |-----------|--------|
-| "Who implements X?" | Grep("impl.*X for") + findReferences on trait |
+| "Who implements X?" | Grep("impl.*X for") + Read each impl block |
 | "What traits does Y impl?" | Grep("impl.*for Y") |
 | "Show trait hierarchy" | Find super-traits recursively |
 | "Is X: Send + Sync?" | Check std trait impls |

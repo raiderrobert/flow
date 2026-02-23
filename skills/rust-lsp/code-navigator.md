@@ -1,6 +1,6 @@
 # Code Navigator
 
-Navigate large Rust codebases efficiently using Language Server Protocol.
+Navigate large Rust codebases efficiently using Grep, Glob, and Read.
 
 ## Usage
 

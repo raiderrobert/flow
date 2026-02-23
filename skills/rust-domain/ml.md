@@ -90,7 +90,7 @@ fn get_model() -> &'static OnnxModel {
 
 async fn predict(input: Vec<f32>) -> anyhow::Result<Vec<f32>> {
     let model = get_model();
-    let input = tract_ndarray::arr1(&input).into_shape((1, input.len()))?;
+    let input = tract_ndarray::Array::from_shape_vec((1, input.len()), input)?;
     let result = model.run(tvec!(input.into()))?;
     Ok(result[0].to_array_view::<f32>()?.iter().copied().collect())
 }

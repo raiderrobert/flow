@@ -99,6 +99,6 @@ fn main() -> anyhow::Result<()> {
 | Mistake | Domain Violation | Fix |
 |---------|-----------------|-----|
 | Errors to stdout | Breaks piping | eprintln! |
-| No help text | Poor UX | #[arg(help = "...")] |
+| No help text | Poor UX | `///` doc comments on fields |
 | Panic on error | Bad exit code | Result + proper handling |
 | No progress for long ops | User uncertainty | indicatif |
