@@ -12,20 +12,17 @@ Navigate large Rust codebases efficiently using Language Server Protocol.
 - Find definition of parse_config
 - Navigate from specific location
 
-## LSP Operations
+## Analysis Techniques
 
 ### 1. Go to Definition
 
 Find where a symbol is defined.
 
 ```
-LSP(
-  operation: "goToDefinition",
-  filePath: "src/main.rs",
-  line: 25,
-  character: 10
-)
+Grep("(struct|enum|trait|fn|type|const|static|mod) SymbolName", glob: "**/*.rs")
 ```
+
+Then Read the file at the matching location for full context.
 
 **Use when:**
 - User asks "where is X defined?"
@@ -36,12 +33,7 @@ LSP(
 Find all usages of a symbol.
 
 ```
-LSP(
-  operation: "findReferences",
-  filePath: "src/lib.rs",
-  line: 15,
-  character: 8
-)
+Grep("SymbolName", glob: "**/*.rs")
 ```
 
 **Use when:**
@@ -49,17 +41,13 @@ LSP(
 - Before refactoring/renaming
 - Understanding impact of changes
 
-### 3. Hover Information
+### 3. Type and Documentation Info
 
 Get type and documentation for a symbol.
 
 ```
-LSP(
-  operation: "hover",
-  filePath: "src/main.rs",
-  line: 30,
-  character: 15
-)
+1. Grep("(struct|fn|type) SymbolName") to locate definition
+2. Read the file at that location to see type signature and doc comments
 ```
 
 **Use when:**
@@ -80,11 +68,11 @@ User: "Where is the Config struct defined?"
     |
     v
 [3] Go to definition
-    LSP(operation: "goToDefinition", ...)
+    Read the file at the Grep match location
     |
     v
 [4] Show file path and context
-    Read surrounding code for context
+    Read surrounding code for full definition
 ```
 
 ## Output Format
@@ -117,16 +105,16 @@ User: "Where is the Config struct defined?"
 
 | User Says | Tool |
 |-----------|------|
-| "Where is X defined?" | goToDefinition |
-| "Who uses X?" | findReferences |
-| "What type is X?" | hover |
+| "Where is X defined?" | Grep definition pattern + Read |
+| "Who uses X?" | Grep("SymbolName") across **/*.rs |
+| "What type is X?" | Grep definition + Read for signature |
 | "Find all structs" | Grep("^pub struct") |
-| "What's in this file?" | documentSymbol |
+| "What's in this file?" | Grep + Read for structure |
 
 ## Error Handling
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| "No LSP server" | rust-analyzer not running | Suggest: `rustup component add rust-analyzer` |
-| "Symbol not found" | Typo or not in scope | Search with Grep first |
-| "Multiple definitions" | Generics or macros | Show all and let user choose |
+| No matches found | Typo or not in scope | Try broader Grep pattern |
+| Multiple definitions | Generics or macros | Show all and let user choose |
+| Symbol in macro | Generated code not greppable | Check macro expansion with `cargo expand` |

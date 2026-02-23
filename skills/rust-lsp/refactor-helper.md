@@ -14,29 +14,19 @@ Perform safe refactoring with comprehensive impact analysis.
 - `inline <fn>` - Inline function
 - `move <symbol> <dest>` - Move to module
 
-## LSP Operations Used
+## Analysis Techniques
 
 ### Pre-Refactor Analysis
 
 ```
 # Find all references before renaming
-LSP(
-  operation: "findReferences",
-  filePath: "src/lib.rs",
-  line: 25,
-  character: 8
-)
+Grep("symbol_name", glob: "**/*.rs")
 
-# Get symbol info
-LSP(
-  operation: "hover",
-  filePath: "src/lib.rs",
-  line: 25,
-  character: 8
-)
+# Get symbol definition and type info
+Grep("(struct|fn|type|trait|const) symbol_name") then Read the file for full context
 
 # Check callers for move operations
-Grep("symbol_name(") or LSP(findReferences)
+Grep("symbol_name(", glob: "**/*.rs")
 ```
 
 ## Refactoring Workflows
@@ -45,10 +35,10 @@ Grep("symbol_name(") or LSP(findReferences)
 
 ```
 [1] Find symbol definition
-    LSP(goToDefinition)
+    Grep("(struct|fn|type) old_name") + Read
 
 [2] Find ALL references
-    LSP(findReferences)
+    Grep("old_name", glob: "**/*.rs")
 
 [3] Categorize by file
 
@@ -104,7 +94,7 @@ Grep("symbol_name(") or LSP(findReferences)
 [1] Find symbol and all its dependencies
 
 [2] Find all references (callers)
-    LSP(findReferences)
+    Grep("symbol_name", glob: "**/*.rs")
 
 [3] Analyze import changes needed
 

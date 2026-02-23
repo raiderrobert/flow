@@ -1,7 +1,6 @@
 ---
 name: unsafe-checker
 description: "CRITICAL: Use for unsafe Rust code review and FFI. Triggers on: unsafe, raw pointer, FFI, extern, transmute, *mut, *const, union, #[repr(C)], libc, std::ffi, MaybeUninit, NonNull, SAFETY comment, soundness, undefined behavior, UB, safe wrapper, memory layout, bindgen, cbindgen, CString, CStr"
-globs: ["**/*.rs"]
 ---
 
 # Unsafe Rust Checker
@@ -12,13 +11,15 @@ For comprehensive unsafe Rust rules and checklists, read the relevant reference:
 
 | Topic | Reference |
 |-------|-----------|
-| Full rule index, clippy mapping, decision tree | `./AGENTS.md` |
+| Full rule index, clippy mapping, decision tree | `./rule-index.md` |
 | Pre-writing checklist | `./checklists/before-unsafe.md` |
 | Code review checklist | `./checklists/review-unsafe.md` |
 | Common pitfalls | `./checklists/common-pitfalls.md` |
 | Safe wrapper patterns | `./examples/safe-abstraction.md` |
 | FFI best practices | `./examples/ffi-patterns.md` |
 | Individual rules | `./rules/` directory |
+
+Rule provenance and source metadata are tracked in `metadata.json`.
 
 ## When Unsafe is Valid
 

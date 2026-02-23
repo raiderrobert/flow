@@ -84,6 +84,8 @@
 | Functional | Mutability is safe via ownership |
 | JavaScript | No null, use Option instead |
 
+For detailed comparisons, see `examples/language-comparison.md`.
+
 ## Common Misconceptions
 
 | Error | Wrong Model | Correct Model |

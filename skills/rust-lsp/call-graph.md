@@ -16,28 +16,19 @@ Visualize function call relationships using Grep-based analysis and LSP referenc
 
 ### Finding Callers (Incoming Calls)
 
-Use `findReferences` on the function to find all call sites:
+Search for all call sites using Grep:
 
 ```
-LSP(
-  operation: "findReferences",
-  filePath: "src/handler.rs",
-  line: 45,
-  character: 8
-)
+Grep("function_name\(", glob: "**/*.rs")
 ```
 
-Or supplement with Grep for broader coverage:
-
-```
-Grep("function_name\(")
-```
+This finds all locations where the function is invoked across the codebase.
 
 ### Finding Callees (Outgoing Calls)
 
 Read the function body and search for function calls within it:
 
-1. Use `goToDefinition` to find the function
+1. Grep("fn function_name") to find the function definition
 2. Read the function body
 3. Identify called functions via pattern matching
 4. Recursively expand to desired depth
@@ -49,11 +40,11 @@ User: "Show call graph for process_request"
     |
     v
 [1] Find function location
-    Grep("fn process_request") or goToDefinition
+    Grep("fn process_request")
     |
     v
 [2] Get incoming calls (callers)
-    LSP(findReferences) or Grep("process_request(")
+    Grep("process_request(")
     |
     v
 [3] Get outgoing calls (callees)

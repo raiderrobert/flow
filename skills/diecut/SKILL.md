@@ -1,6 +1,7 @@
 ---
 name: diecut
 description: "Use when working with diecut templates. Triggers include scaffolding projects, creating projects from templates, building template repositories, configuring template variables, adding conditional files, setting up hooks, or when editing diecut.toml files."
+globs: ["**/diecut.toml", "**/*.tera"]
 ---
 
 # Diecut: Project Scaffolding
