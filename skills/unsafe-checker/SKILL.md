@@ -2,23 +2,23 @@
 name: unsafe-checker
 description: "CRITICAL: Use for unsafe Rust code review and FFI. Triggers on: unsafe, raw pointer, FFI, extern, transmute, *mut, *const, union, #[repr(C)], libc, std::ffi, MaybeUninit, NonNull, SAFETY comment, soundness, undefined behavior, UB, safe wrapper, memory layout, bindgen, cbindgen, CString, CStr"
 globs: ["**/*.rs"]
-allowed-tools: ["Read", "Grep", "Glob"]
----
-
-Display the following ASCII art exactly as shown. Do not modify spaces or line breaks:
-```text
-⚠️ **Unsafe Rust Checker Loaded**
-
-     *  ^  *
-    /◉\_~^~_/◉\
- ⚡/     o     \⚡
-   '_        _'
-   / '-----' \
-```
-
 ---
 
 # Unsafe Rust Checker
+
+## Routing
+
+For comprehensive unsafe Rust rules and checklists, read the relevant reference:
+
+| Topic | Reference |
+|-------|-----------|
+| Full rule index, clippy mapping, decision tree | `./AGENTS.md` |
+| Pre-writing checklist | `./checklists/before-unsafe.md` |
+| Code review checklist | `./checklists/review-unsafe.md` |
+| Common pitfalls | `./checklists/common-pitfalls.md` |
+| Safe wrapper patterns | `./examples/safe-abstraction.md` |
+| FFI best practices | `./examples/ffi-patterns.md` |
+| Individual rules | `./rules/` directory |
 
 ## When Unsafe is Valid
 
@@ -63,16 +63,16 @@ pub unsafe fn dangerous() { ... }
 | Invalid bit pattern | Use `MaybeUninit` |
 | Missing SAFETY comment | Add `// SAFETY:` |
 
-## Deprecated → Better
+## Pitfalls
 
-| Deprecated | Use Instead |
-|------------|-------------|
-| `mem::uninitialized()` | `MaybeUninit<T>` |
-| `mem::zeroed()` for refs | `MaybeUninit<T>` |
-| Raw pointer arithmetic | `NonNull<T>`, `ptr::add` |
-| `CString::new().unwrap().as_ptr()` | Store `CString` first |
-| `static mut` | `AtomicT` or `Mutex` |
-| Manual extern | `bindgen` |
+| Pattern | Problem | Fix |
+|---------|---------|-----|
+| `mem::uninitialized()` | Instant UB | `MaybeUninit<T>` |
+| `mem::zeroed()` for refs | Null reference UB | `MaybeUninit<T>` |
+| Raw pointer arithmetic | Easy to go OOB | `NonNull<T>`, `ptr::add` |
+| `CString::new().unwrap().as_ptr()` | Dangling pointer: `CString` is dropped at end of statement, pointer is invalid | Store `CString` in a binding first |
+| `static mut` | Data races | `AtomicT` or `Mutex` |
+| Manual extern | Error-prone signatures | `bindgen` |
 
 ## FFI Crates
 
@@ -82,5 +82,3 @@ pub unsafe fn dangerous() { ... }
 | Rust → C | cbindgen |
 | Python | PyO3 |
 | Node.js | napi-rs |
-
-Claude knows unsafe Rust. Focus on SAFETY comments and soundness.

@@ -13,7 +13,7 @@ Analyze project structure by examining symbols across your Rust codebase.
 - `/rust-lsp src/lib.rs` - Analyze single file
 - `/rust-lsp --type trait` - List all traits in project
 
-## LSP Operations
+## Approach
 
 ### 1. Document Symbols (Single File)
 
@@ -30,17 +30,17 @@ LSP(
 
 **Returns:** Nested structure of modules, structs, functions, etc.
 
-### 2. Workspace Symbols (Entire Project)
+### 2. Project-Wide Symbol Search
 
-Search for symbols across the workspace.
+Find symbols across the workspace using Glob + documentSymbol.
 
 ```
-LSP(
-  operation: "workspaceSymbol",
-  filePath: "src/lib.rs",
-  line: 1,
-  character: 1
-)
+1. Glob("**/*.rs") → find all Rust files
+2. LSP(documentSymbol) on key files (lib.rs, main.rs, mod.rs files)
+3. For specific symbol types, use Grep:
+   - Structs: Grep("^pub struct \w+")
+   - Traits: Grep("^pub trait \w+")
+   - Functions: Grep("^pub fn \w+")
 ```
 
 ## Workflow
@@ -132,7 +132,7 @@ tests/
 
 | User Says | Analysis |
 |-----------|----------|
-| "What structs are in this project?" | workspaceSymbol + filter |
+| "What structs are in this project?" | Grep("^pub struct") + documentSymbol |
 | "Show me src/lib.rs structure" | documentSymbol |
-| "Find all async functions" | workspaceSymbol + async filter |
+| "Find all async functions" | Grep("async fn") |
 | "List public API" | documentSymbol + pub filter |

@@ -120,7 +120,8 @@ where
 
 ### T: 'a (Type Outlives Lifetime)
 ```rust
-struct Wrapper<'a, T: 'a> {
+// T: 'a is inferred automatically since Rust 2018 edition
+struct Wrapper<'a, T> {
     value: &'a T,
 }
 ```

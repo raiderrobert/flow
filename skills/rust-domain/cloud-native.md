@@ -69,10 +69,9 @@ async fn run_server() -> anyhow::Result<()> {
         .route("/health", get(health))
         .route("/ready", get(ready));
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await?;
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
+    axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
 

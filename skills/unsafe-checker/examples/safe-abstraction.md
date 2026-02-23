@@ -91,8 +91,7 @@ impl Drop for CBuffer {
     }
 }
 
-// Prevent double-free
-impl !Clone for CBuffer {}
+// Clone is intentionally not implemented — prevents double-free
 
 // Safe to send between threads (assuming c_alloc is thread-safe)
 unsafe impl Send for CBuffer {}

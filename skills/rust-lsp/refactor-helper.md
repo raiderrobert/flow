@@ -35,13 +35,8 @@ LSP(
   character: 8
 )
 
-# Check call hierarchy for move operations
-LSP(
-  operation: "incomingCalls",
-  filePath: "src/lib.rs",
-  line: 25,
-  character: 8
-)
+# Check callers for move operations
+Grep("symbol_name(") or LSP(findReferences)
 ```
 
 ## Refactoring Workflows

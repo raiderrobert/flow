@@ -71,8 +71,7 @@ impl Drop for Library {
     }
 }
 
-// Prevent accidental copies
-impl !Clone for Library {}
+// Clone is intentionally not implemented — prevents double-free
 ```
 
 ## Pattern 2: Callback Registration

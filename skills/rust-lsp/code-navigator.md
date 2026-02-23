@@ -73,7 +73,7 @@ User: "Where is the Config struct defined?"
     |
     v
 [1] Search for "Config" in workspace
-    LSP(operation: "workspaceSymbol", ...)
+    Grep("struct Config") or Glob("**/config*.rs")
     |
     v
 [2] If multiple results, ask user to clarify
@@ -115,12 +115,12 @@ User: "Where is the Config struct defined?"
 
 ## Common Patterns
 
-| User Says | LSP Operation |
-|-----------|---------------|
+| User Says | Tool |
+|-----------|------|
 | "Where is X defined?" | goToDefinition |
 | "Who uses X?" | findReferences |
 | "What type is X?" | hover |
-| "Find all structs" | workspaceSymbol |
+| "Find all structs" | Grep("^pub struct") |
 | "What's in this file?" | documentSymbol |
 
 ## Error Handling
@@ -128,5 +128,5 @@ User: "Where is the Config struct defined?"
 | Error | Cause | Solution |
 |-------|-------|----------|
 | "No LSP server" | rust-analyzer not running | Suggest: `rustup component add rust-analyzer` |
-| "Symbol not found" | Typo or not in scope | Search with workspaceSymbol first |
+| "Symbol not found" | Typo or not in scope | Search with Grep first |
 | "Multiple definitions" | Generics or macros | Show all and let user choose |
