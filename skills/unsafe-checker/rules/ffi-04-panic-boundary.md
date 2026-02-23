@@ -107,6 +107,9 @@ pub extern "C-unwind" fn rust_callback_can_unwind() {
 ## FFI Error Handling Pattern
 
 ```rust
+use std::ffi::CString;
+use std::os::raw::{c_char, c_int};
+
 // Define error codes
 const SUCCESS: c_int = 0;
 const ERR_NULL_PTR: c_int = -1;
@@ -123,12 +126,28 @@ fn set_error(msg: String) {
     LAST_ERROR.with(|e| *e.borrow_mut() = Some(msg));
 }
 
+/// Get the last error message. Caller must free with `free_error_string`.
 #[no_mangle]
-pub extern "C" fn get_last_error() -> *const c_char {
+pub extern "C" fn get_last_error() -> *mut c_char {
     LAST_ERROR.with(|e| {
-        e.borrow().as_ref().map(|s| s.as_ptr() as *const c_char)
-            .unwrap_or(std::ptr::null())
+        e.borrow()
+            .as_ref()
+            .map(|s| {
+                CString::new(s.as_str())
+                    .unwrap_or_else(|_| CString::new("error").unwrap())
+                    .into_raw()
+            })
+            .unwrap_or(std::ptr::null_mut())
     })
+}
+
+/// Free a string returned by `get_last_error`.
+#[no_mangle]
+pub extern "C" fn free_error_string(s: *mut c_char) {
+    if !s.is_null() {
+        // SAFETY: String was created by CString::into_raw
+        unsafe { drop(CString::from_raw(s)); }
+    }
 }
 ```
 

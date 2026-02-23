@@ -47,7 +47,6 @@ RUST: tracing spans, opentelemetry export
 | Tracing | tracing, opentelemetry |
 | Metrics | prometheus, metrics |
 | Config | config, figment |
-| Health | HTTP endpoints |
 
 ## Design Patterns
 
@@ -79,7 +78,14 @@ async fn run_server() -> anyhow::Result<()> {
 }
 
 async fn shutdown_signal() {
-    signal::ctrl_c().await.expect("failed to listen for ctrl+c");
+    let ctrl_c = signal::ctrl_c();
+    let mut sigterm = signal::unix::signal(signal::unix::SignalKind::terminate())
+        .expect("failed to register SIGTERM handler");
+
+    tokio::select! {
+        _ = ctrl_c => {},
+        _ = sigterm.recv() => {},
+    }
     tracing::info!("shutdown signal received");
 }
 ```

@@ -42,7 +42,6 @@ RUST: Extractors, proper ownership
 |-----------|-------|----------|
 | axum | Functional, tower | Modern APIs |
 | actix-web | Actor-based | High performance |
-| warp | Filter composition | Composable APIs |
 | rocket | Macro-driven | Rapid development |
 
 ## Key Crates

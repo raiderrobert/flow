@@ -81,10 +81,11 @@ async fn run_mqtt() -> anyhow::Result<()> {
     client.subscribe("devices/device-1/commands", QoS::AtLeastOnce).await?;
 
     // Publish telemetry
+    let publisher = client.clone();
     tokio::spawn(async move {
         loop {
             let data = read_sensor().await;
-            client.publish("devices/device-1/telemetry", QoS::AtLeastOnce, false, data).await.ok();
+            publisher.publish("devices/device-1/telemetry", QoS::AtLeastOnce, false, data).await.ok();
             tokio::time::sleep(Duration::from_secs(60)).await;
         }
     });

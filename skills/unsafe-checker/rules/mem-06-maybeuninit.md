@@ -67,8 +67,8 @@ fn good_array() -> [String; 10] {
     unsafe { std::mem::transmute::<_, [String; 10]>(arr) }
 }
 
-// DO: Use MaybeUninit with arrays (cleaner with array_assume_init)
-fn good_array_nightly() -> [String; 10] {
+// DO: Use MaybeUninit with arrays (cleaner with array_assume_init, stable since 1.82)
+fn good_array_v2() -> [String; 10] {
     let mut arr: [MaybeUninit<String>; 10] =
         [const { MaybeUninit::uninit() }; 10];
 
@@ -76,7 +76,7 @@ fn good_array_nightly() -> [String; 10] {
         elem.write(format!("item {}", i));
     }
 
-    // On nightly: arr.map(|e| unsafe { e.assume_init() })
+    // SAFETY: All elements initialized above. Stabilized in Rust 1.82.
     unsafe { MaybeUninit::array_assume_init(arr) }
 }
 
@@ -103,7 +103,7 @@ fn good_vec() -> Vec<u8> {
     v
 }
 
-// DO: Use MaybeUninit::uninit_array (nightly) or const array
+// DO: Use const array for MaybeUninit initialization
 fn good_uninit_array<const N: usize>() -> [MaybeUninit<u8>; N] {
     // Stable: create array of uninit
     [const { MaybeUninit::uninit() }; N]

@@ -52,7 +52,8 @@ Async context?
 | `async/await` | Yes | No | I/O-bound concurrency |
 | `Mutex<T>` | Yes | Yes | Shared mutable state |
 | `RwLock<T>` | Yes | Yes | Read-heavy shared state |
-| `mpsc::channel` / `crossbeam::channel` | Yes | Optional | Message passing |
+| `tokio::sync::mpsc` | Yes | No | Async message passing |
+| `crossbeam::channel` | Yes | Optional | Sync message passing |
 | `Arc<Mutex<T>>` | Yes | Yes | Shared mutable across threads |
 
 ## Async-Specific Patterns
