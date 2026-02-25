@@ -1,12 +1,22 @@
 {
   "name": "flow",
   "description": "Rust skills, design quality skills, domain expertise, and development workflows for Claude Code",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "raiderrobert"
   },
   "homepage": "https://github.com/raiderrobert/flow",
   "repository": "https://github.com/raiderrobert/flow",
   "license": "MIT",
-  "keywords": ["skills", "rust", "domain", "workflows", "diecut", "design", "frontend", "visual-design", "anti-slop"]
+  "keywords": [
+    "skills",
+    "rust",
+    "domain",
+    "workflows",
+    "diecut",
+    "design",
+    "frontend",
+    "visual-design",
+    "anti-slop"
+  ]
 }
