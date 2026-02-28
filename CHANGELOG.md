@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/raiderrobert/flow/compare/v0.2.1...v0.2.2) (2026-02-28)
+
+
+### Bug Fixes
+
+* condense rust skill description to fix silent discovery failure ([ecc3fb1](https://github.com/raiderrobert/flow/commit/ecc3fb155eb32ec5e4db5d5458bfb0ff89e26d18))
+* condense rust skill description to fix silent discovery failure ([b3657ea](https://github.com/raiderrobert/flow/commit/b3657eac8911ebff7d973aa9cf7137a2ff683b11))
+
 ## [0.2.1](https://github.com/raiderrobert/flow/compare/v0.2.0...v0.2.1) (2026-02-25)
 
 
