@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/raiderrobert/flow/compare/v0.2.4...v0.2.5) (2026-02-28)
+
+
+### Bug Fixes
+
+* correct tool references and improve workflow skill robustness ([#18](https://github.com/raiderrobert/flow/issues/18)) ([c62b215](https://github.com/raiderrobert/flow/commit/c62b21546a8d192e0d21d86c1f5e5d8f8bc930e1))
+
 ## [0.2.4](https://github.com/raiderrobert/flow/compare/v0.2.3...v0.2.4) (2026-02-28)
 
 
