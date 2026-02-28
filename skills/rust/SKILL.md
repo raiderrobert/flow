@@ -1,24 +1,6 @@
 ---
 name: rust
-description: "Use for ALL Rust questions including errors, design, patterns, and coding.
-Triggers on: Rust, cargo, rustc, crate, Cargo.toml,
-compile error, borrow error, lifetime error, ownership error, type error, trait error,
-value moved, cannot borrow, does not live long enough, mismatched types, not satisfied,
-E0382, E0597, E0277, E0308, E0499, E0502, E0596, E0506, E0507, E0515, E0716, E0106,
-E0038, E0599, E0433, E0603,
-async, await, Send, Sync, tokio, concurrency, thread, spawn, channel, Mutex, deadlock,
-Result, Option, Error, panic, anyhow, thiserror, unwrap, expect,
-Box, Rc, Arc, RefCell, Cell, smart pointer, RAII, Drop,
-generic, trait, impl, dyn, monomorphization, static dispatch, dynamic dispatch,
-type state, PhantomData, newtype, builder pattern,
-domain model, DDD, entity, value object, aggregate,
-performance, optimization, benchmark, profiling, flamegraph, criterion,
-crate, dependency, feature flag, workspace, PyO3, wasm, bindgen,
-resource lifecycle, connection pool, lazy initialization, OnceLock,
-mental model, how to think about ownership, coming from Java, coming from Python,
-anti-pattern, common mistake, pitfall, code smell, code review, idiomatic,
-naming, formatting, clippy, rustfmt, code style, best practice,
-mut, interior mutability, move, clone, Copy, lifetime, borrow, ownership"
+description: "Use for ALL Rust questions including errors, design, patterns, and coding. Triggers on: Rust, cargo, rustc, Cargo.toml, compiler errors (E0382, E0597, E0277, E0308, E0499, E0502, E0506, E0507), ownership, borrowing, lifetimes, traits, generics, async/await, tokio, concurrency, Result, Option, Error, thiserror, anyhow, Box, Rc, Arc, RefCell, performance, profiling, clippy, code review, anti-pattern, idiomatic Rust, code style, best practice"
 globs: ["**/Cargo.toml", "**/*.rs"]
 ---
 
