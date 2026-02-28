@@ -160,5 +160,5 @@ for a in field_a.iter() {
 |-------|-------|-----------|
 | Beginner | Ownership basics | `ref/ownership.md` |
 | Intermediate | Smart pointers, error handling | `ref/ownership.md`, `ref/error-handling.md` |
-| Advanced | Concurrency, unsafe | `ref/concurrency.md`, `unsafe-checker` skill |
+| Advanced | Concurrency, unsafe | `ref/concurrency.md`, `rust-unsafe` skill |
 | Expert | Design patterns, domain | `ref/design-patterns.md`, `rust-domain` skill |

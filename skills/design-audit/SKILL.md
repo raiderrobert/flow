@@ -1,5 +1,5 @@
 ---
-name: anti-slop-audit
+name: design-audit
 description: "Use after generating any visual design, frontend code, or .pen file to check for generic AI defaults. Triggers on: review design, audit design, check design quality, design review, does this look good, is this generic, AI slop, design check, visual QA, before shipping design, review my frontend, check my CSS, quality check, polish, improve design. Catches common AI aesthetic convergence patterns."
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: find-references
+name: cite-check
 description: "Use when the user has a list of claims, ideas, laws, quotes, or attributions and needs original sources and provenance for each. Triggers include: find references, find sources, source this, cite these, where does this come from, who said this, original source, provenance, attribution check, fact-check attributions."
 ---
 
