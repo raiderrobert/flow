@@ -73,7 +73,7 @@ Dispatch an `Explore` subagent (read-only) into the worktree.
 | `run_in_background` | `true` |
 
 The subagent should:
-- `cd <worktree-absolute-path>` as its first action (the Task tool starts subagents in the parent's working directory, not the worktree)
+- `cd <worktree-absolute-path>` as its first action (the Agent tool starts subagents in the parent's working directory, not the worktree)
 - Read the full diff (`git diff main..<branch>`)
 - Use `git show main:<path>` to read baseline files on main for context
 - Read files directly from the worktree path for the branch version

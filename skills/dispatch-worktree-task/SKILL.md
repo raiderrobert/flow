@@ -74,7 +74,7 @@ Use `.worktrees/` directory. Check that `.worktrees/` is in `.gitignore`. If not
 
 ### 3. Dispatch subagent
 
-Use the Task tool with these settings:
+Use the Agent tool with these settings:
 
 | Parameter | Value |
 |-----------|-------|
@@ -82,9 +82,11 @@ Use the Task tool with these settings:
 | `mode` | `bypassPermissions` |
 | `run_in_background` | `true` |
 
+> **Risk note:** Unlike `isolation: "worktree"` (which physically starts the agent in a separate directory), `bypassPermissions` here applies while the agent is still in the parent's working directory. The `cd` instruction below is critical — without it, the agent operates on the main tree with no permission prompts. Always make `cd` the first instruction in the prompt and never place other commands before it.
+
 **Prompt must include:**
 - Worktree path and branch name
-- **Explicit `cd <worktree-absolute-path>` as the subagent's first action.** The Task tool starts subagents in the parent's working directory, not the worktree.
+- **Explicit `cd <worktree-absolute-path>` as the subagent's FIRST action — before any other command.** The Agent tool starts subagents in the parent's working directory, not the worktree.
 - Full implementation plan
 - Pre-commit validation commands (from project CLAUDE.md)
 - **Reproduction command** — a command that exercises the same scenario as the original report. Adapt for the worktree context (temp output dirs, etc.) but verify the same behavior.
