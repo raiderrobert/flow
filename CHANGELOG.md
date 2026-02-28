@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/raiderrobert/flow/compare/v0.2.3...v0.2.4) (2026-02-28)
+
+
+### Features
+
+* add workflow skills ([#16](https://github.com/raiderrobert/flow/issues/16)) ([6f6d948](https://github.com/raiderrobert/flow/commit/6f6d9489bb5ba62292d06d59d4bf6d74e1e79881))
+
 ## [0.2.3](https://github.com/raiderrobert/flow/compare/v0.2.2...v0.2.3) (2026-02-28)
 
 
