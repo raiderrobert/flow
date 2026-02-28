@@ -67,7 +67,7 @@ Present the findings to the user. Ask if they want to:
 - Fix only specific findings (by number)
 - Skip the dispatch and keep the review document
 
-If the user chooses to **skip dispatch**, write findings to `_review-findings.md` in the repo root and stop. Otherwise, keep findings in context (the agent already has them in memory) and continue.
+If the user chooses to **skip dispatch**, write findings to `_review-findings.md` in the repo root and stop. Otherwise, write findings to `_review-findings.md` as a backup (dispatch involves multiple background agents and context compression could lose them), then continue. Delete the file in step 8 after all fixes land.
 
 ### 4. Create Task List
 
@@ -114,7 +114,7 @@ Do NOT add comments, docstrings, or formatting changes to code you didn't change
 
 As each agent completes (or after each wave):
 
-1. The Task tool result includes the worktree branch name. Use it to find the commit SHA:
+1. The Agent tool result includes the worktree branch name. Use it to find the commit SHA:
    ```bash
    git log --oneline -1 <worktree-branch>
    ```
@@ -123,8 +123,8 @@ As each agent completes (or after each wave):
    git cherry-pick <sha>
    ```
 3. If the cherry-pick conflicts:
-   - Check if the conflict is trivial (overlapping context lines) — resolve manually.
-   - If the conflict is substantive (two fixes changed the same logic), re-dispatch one of them with the other's changes already applied.
+   - Check if the conflict is trivial (overlapping context lines) — resolve manually and `git cherry-pick --continue`.
+   - If the conflict is substantive (two fixes changed the same logic), abort with `git cherry-pick --abort` and re-dispatch one of them with the other's changes already applied.
 4. Mark the corresponding task as completed.
 
 **Cherry-pick in dependency order:** If fixes were dispatched with noted dependencies, cherry-pick the prerequisite first.
@@ -140,9 +140,9 @@ cargo clippy -- -D warnings
 cargo test
 ```
 
-If a check fails after a cherry-pick:
-1. Revert the last cherry-pick: `git cherry-pick --abort` or `git reset --hard HEAD~1`
-2. Identify the conflict between the fix and the current branch state
+If a check fails after a cherry-pick (the cherry-pick succeeded but validation doesn't pass):
+1. Undo the cherry-pick: `git reset --hard HEAD~1`
+2. Identify what the fix broke in the current branch state
 3. Re-dispatch that specific fix with the current branch state as context
 
 After all cherry-picks land, run the full validation suite once more to confirm the integrated result passes.
@@ -159,6 +159,12 @@ After all cherry-picks land, run the full validation suite once more to confirm 
    git push
    ```
 3. If a PR exists for this branch, update its description with a "Code review fixes" section listing each finding and its resolution.
+4. Remove stale worktrees created by `isolation: "worktree"` agents. List them and remove any that correspond to completed fixes:
+   ```bash
+   git worktree list
+   git worktree remove <worktree-path>
+   ```
+5. Delete `_review-findings.md` (the backup from step 3).
 
 ---
 
@@ -182,4 +188,6 @@ Before reporting completion to the user:
 - [ ] User confirmed push after seeing `git log` and validation results
 - [ ] Branch has been pushed
 - [ ] PR description updated (if a PR exists)
+- [ ] Stale worktrees removed
+- [ ] `_review-findings.md` deleted
 - [ ] Task list shows all findings resolved
