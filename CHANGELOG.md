@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.3](https://github.com/raiderrobert/flow/compare/v0.2.2...v0.2.3) (2026-02-28)
+
+
+### Features
+
+* add workflow skills ([#15](https://github.com/raiderrobert/flow/issues/15)) ([896732d](https://github.com/raiderrobert/flow/commit/896732d696e5c6c4754b26dc86fe5031f367adff))
+
+
+### Code Refactoring
+
+* rename skills for consistent prefix conventions ([7c35edb](https://github.com/raiderrobert/flow/commit/7c35edbbdd4ee84d82f8879e94b7b2f7e5733c26))
+* rename skills for consistent prefix conventions ([688e66c](https://github.com/raiderrobert/flow/commit/688e66cace6f7abf3d619ad103355071e2b36221))
+
 ## [0.2.2](https://github.com/raiderrobert/flow/compare/v0.2.1...v0.2.2) (2026-02-28)
 
 
