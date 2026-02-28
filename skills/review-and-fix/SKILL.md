@@ -111,19 +111,18 @@ Do NOT add comments, docstrings, or formatting changes to code you didn't change
 
 As each agent completes:
 
-1. Check the agent's result for the worktree path and branch name.
-2. Find the commit SHA:
+1. The Task tool result includes the worktree branch name. Use it to find the commit SHA:
    ```bash
    git log --oneline -1 <worktree-branch>
    ```
-3. Cherry-pick onto the working branch:
+2. Cherry-pick onto the working branch:
    ```bash
    git cherry-pick <sha>
    ```
-4. If the cherry-pick conflicts:
+3. If the cherry-pick conflicts:
    - Check if the conflict is trivial (overlapping context lines) — resolve manually.
    - If the conflict is substantive (two fixes changed the same logic), re-dispatch one of them with the other's changes already applied.
-5. Mark the corresponding task as completed.
+4. Mark the corresponding task as completed.
 
 **Cherry-pick in dependency order:** If fixes were dispatched with noted dependencies, cherry-pick the prerequisite first.
 

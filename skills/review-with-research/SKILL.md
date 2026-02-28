@@ -50,7 +50,7 @@ digraph review {
 git worktree add .worktrees/review-<branch> <branch>
 ```
 
-This keeps the main session on its current branch. Clean up after the review.
+Ensure `.worktrees/` is in the project's `.gitignore`. This keeps the main session on its current branch. Clean up after the review.
 
 ### 1. Dispatch review subagent (parallel with step 2)
 

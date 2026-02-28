@@ -53,7 +53,7 @@ Write a detailed plan that includes:
 git worktree add .worktrees/<branch-name> -b <branch-name> main
 ```
 
-Use `.worktrees/` directory. Branch name should match the work (e.g., `fix/cache-lock-fs4`).
+Use `.worktrees/` directory (ensure it's in `.gitignore`). Branch name should match the work (e.g., `fix/cache-lock-fs4`).
 
 > **Why manual worktrees instead of `isolation: "worktree"`?** The branch is the deliverable — it gets pushed and PR'd. You need a named branch you control. For fan-out/fan-in where you cherry-pick temporary commits back, see `review-and-fix`.
 
