@@ -43,9 +43,9 @@ Focus the review on the branch diff, not the entire codebase. Look for:
 
 Produce a structured list of findings.
 
-### 3. Document Findings
+**If the review finds no issues, report a clean review to the user and stop.** Do not proceed to dispatch.
 
-Write findings to a temporary markdown file in the repo root: `_review-findings.md`
+### 3. Document Findings
 
 Format each finding as:
 
@@ -65,13 +65,13 @@ Format each finding as:
 Present the findings to the user. Ask if they want to:
 - Fix all findings
 - Fix only specific findings (by number)
-- Skip the dispatch and just keep the review document
+- Skip the dispatch and keep the review document
 
-If the user says to proceed, continue to step 4.
+If the user chooses to **skip dispatch**, write findings to `_review-findings.md` in the repo root and stop. Otherwise, keep findings in context (the agent already has them in memory) and continue.
 
 ### 4. Create Task List
 
-Create one task per finding using `TaskCreate`. Include the finding number, title, severity, and file list in each task description.
+Create one task per finding using `TaskCreate`. Include the finding number, title, severity, and file list in each task description. Step 5 uses this as the dispatch manifest — tasks are marked in-progress as agents launch and completed as cherry-picks land.
 
 ### 5. Dispatch Parallel Worktree Agents
 
@@ -79,9 +79,9 @@ Launch one `general-purpose` subagent per fix. Use `isolation: "worktree"`, `run
 
 > **Why `isolation: "worktree"` instead of manual worktrees?** These worktrees are temporary scaffolding — you cherry-pick the commits back by SHA and the worktree is discarded. You don't need named branches. For backgrounding a single task where the branch is the deliverable, see `dispatch-worktree-task`.
 
-**Dispatch order:** Least-coupled fixes first. If two fixes touch the same file, note the dependency and dispatch them sequentially or flag the potential conflict.
+**Dispatch order:** Least-coupled fixes first. If two fixes touch the same file, they cannot run in parallel — cherry-pick the first fix BEFORE creating the second worktree so the second agent branches from the updated state.
 
-**Wave sizing:** For more than 4 findings, dispatch in waves of 3–4 to manage resource usage and reduce conflict risk. Wait for a wave to complete before dispatching the next.
+**Wave strategy:** For more than 4 findings, dispatch in waves of 3–4. Complete the wave, cherry-pick all results, then dispatch the next wave. This gives the next wave a more complete starting state and reduces conflicts. Mark tasks in-progress as agents launch.
 
 **Agent prompt template:**
 
@@ -112,9 +112,7 @@ Do NOT add comments, docstrings, or formatting changes to code you didn't change
 
 ### 6. Cherry-Pick Results
 
-> **Before cherry-picking:** Ensure the working tree is clean. If `_review-findings.md` is untracked, either `git stash -u` or add it to `.gitignore` first. Cherry-pick will refuse to run with uncommitted changes.
-
-As each agent completes:
+As each agent completes (or after each wave):
 
 1. The Task tool result includes the worktree branch name. Use it to find the commit SHA:
    ```bash
@@ -133,7 +131,7 @@ As each agent completes:
 
 ### 7. Verify
 
-Run the full pre-commit validation suite on the integrated result:
+Run pre-commit validation after each cherry-pick (not just at the end) to catch failures early:
 
 ```bash
 # Example for Rust — use whatever the project's CLAUDE.md specifies
@@ -142,18 +140,25 @@ cargo clippy -- -D warnings
 cargo test
 ```
 
-All checks must pass. If something fails:
-- Identify which cherry-picked fix caused the failure.
-- Either fix it directly or re-dispatch that specific fix with the current branch state.
+If a check fails after a cherry-pick:
+1. Revert the last cherry-pick: `git cherry-pick --abort` or `git reset --hard HEAD~1`
+2. Identify the conflict between the fix and the current branch state
+3. Re-dispatch that specific fix with the current branch state as context
+
+After all cherry-picks land, run the full validation suite once more to confirm the integrated result passes.
 
 ### 8. Push and Clean Up
 
-1. Push the branch:
+1. Show the user what will be pushed:
+   ```bash
+   git log main..HEAD --oneline
+   ```
+   Along with validation results. Ask the user to confirm before pushing.
+2. Push the branch:
    ```bash
    git push
    ```
-2. If a PR exists for this branch, update its description with a "Code review fixes" section listing each finding and its resolution.
-3. Delete the `_review-findings.md` file (or keep it if the user wants it).
+3. If a PR exists for this branch, update its description with a "Code review fixes" section listing each finding and its resolution.
 
 ---
 
@@ -164,7 +169,7 @@ All checks must pass. If something fails:
 - **Cherry-pick in dependency order.** Least-coupled first, then fixes that depend on earlier ones.
 - **If cherry-pick conflicts, resolve or re-dispatch.** Don't force through broken merges.
 - **No co-authored-by lines.** Per user preference — encode this in every agent prompt.
-- **Clean up after yourself.** Remove the findings file, mark tasks complete, report final status.
+- **Clean up after yourself.** Mark tasks complete, report final status.
 
 ---
 
@@ -174,7 +179,7 @@ Before reporting completion to the user:
 
 - [ ] All dispatched fixes have been cherry-picked
 - [ ] Pre-commit validation passes on the integrated result
+- [ ] User confirmed push after seeing `git log` and validation results
 - [ ] Branch has been pushed
 - [ ] PR description updated (if a PR exists)
-- [ ] Findings file cleaned up
 - [ ] Task list shows all findings resolved

@@ -30,17 +30,15 @@ digraph review {
   review [label="1. Dispatch review subagent\n(read diff + baseline in worktree)"];
   research [label="2. Dispatch research subagent\n(ecosystem, libraries, how major tools do it)"];
   parallel [label="Run 1 and 2\nin parallel" shape=diamond];
-  synthesize [label="3. Synthesize:\ncompare impl vs best practices"];
-  verdict [label="4. Deliver verdict\nwith specific evidence"];
-  cleanup [label="5. Remove worktree"];
+  synthesize [label="3. Synthesize + verdict:\ncompare impl vs best practices"];
+  cleanup [label="4. Remove worktree"];
 
   worktree -> parallel;
   parallel -> review;
   parallel -> research;
   review -> synthesize;
   research -> synthesize;
-  synthesize -> verdict;
-  verdict -> cleanup;
+  synthesize -> cleanup;
 }
 ```
 
@@ -53,6 +51,17 @@ git worktree add --detach .worktrees/review-<branch> <branch>
 > **Why `--detach`?** If `<branch>` is already checked out (e.g., it's the current branch), `git worktree add` will refuse. Using `--detach` creates the worktree in detached HEAD state, avoiding the "already checked out" error. The worktree still has the branch's content.
 
 Check that `.worktrees/` is in `.gitignore`. If not, add it before creating the worktree. This keeps the main session on its current branch. Clean up after the review.
+
+### 0.5. Identify research topic
+
+Before dispatching subagents, skim the diff briefly to identify the technique or domain to research:
+
+```bash
+git diff main..<branch> --stat
+git diff main..<branch> | head -200
+```
+
+This is a quick read, not the full review — just enough to know the research topic (e.g., "file locking with advisory locks", "JWT refresh token rotation", "concurrent HashMap sharding"). If the diff is empty, short-circuit: report "nothing to review" and stop.
 
 ### 1. Dispatch review subagent (parallel with step 2)
 
@@ -89,18 +98,23 @@ Dispatch a `general-purpose` subagent to:
 **Subagent prompt template:**
 > Research best practices for [topic] in [language/ecosystem]. Find: (1) common libraries, (2) tradeoffs between approaches, (3) what well-known tools use, (4) known failure modes of [technique]. Do NOT write code.
 
-### 3. Synthesize
+### 3. Synthesize and deliver verdict
 
-Compare the review subagent's findings against the research. Does the implementation use the standard approach? Are there unhandled failure modes? Is the complexity justified?
-
-### 4. Deliver verdict
+Compare the review subagent's findings against the research and produce a verdict with this structure:
 
 - **What the branch does** — neutral summary
 - **What the ecosystem does** — researched evidence
 - **Specific problems** — line numbers and failure modes
 - **Recommendation** — accept, reject, or revise with concrete alternative
 
-### 5. Clean up
+**Reconciliation guidance:**
+- If review and research **agree**, state the convergence and cite both.
+- If review and research **contradict**, present both perspectives with specific evidence. Don't silently pick one — the user needs to see the tension.
+- If research is **inconclusive** (topic too niche, conflicting sources), weight code review more heavily, evaluate on first principles, and note the gap explicitly.
+
+**Handoff:** If the recommendation is "revise" and the user wants to proceed with fixes, hand off to `review-and-fix`.
+
+### 4. Clean up
 
 ```bash
 git worktree remove .worktrees/review-<branch>
