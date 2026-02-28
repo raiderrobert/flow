@@ -29,9 +29,10 @@ Read the project's `CLAUDE.md` for pre-commit validation commands — you'll nee
 
 ### 2. Review with a Domain Skill
 
-Invoke the appropriate domain skill for the language/framework:
-- **Rust** — use the `rust` skill
-- **TypeScript** — use general review or a TS skill if available
+Apply domain knowledge from the relevant skill's reference files (e.g., the rust skill's anti-patterns and style references). Do not invoke the Skill tool — stay in this workflow.
+
+- **Rust** — use the `rust` skill's reference files
+- **TypeScript** — use general review or a TS skill's reference files if available
 - **Other** — do a thorough general code review
 
 Focus the review on the branch diff, not the entire codebase. Look for:
@@ -80,6 +81,8 @@ Launch one `general-purpose` subagent per fix. Use `isolation: "worktree"`, `run
 
 **Dispatch order:** Least-coupled fixes first. If two fixes touch the same file, note the dependency and dispatch them sequentially or flag the potential conflict.
 
+**Wave sizing:** For more than 4 findings, dispatch in waves of 3–4 to manage resource usage and reduce conflict risk. Wait for a wave to complete before dispatching the next.
+
 **Agent prompt template:**
 
 ```
@@ -108,6 +111,8 @@ Do NOT add comments, docstrings, or formatting changes to code you didn't change
 ```
 
 ### 6. Cherry-Pick Results
+
+> **Before cherry-picking:** Ensure the working tree is clean. If `_review-findings.md` is untracked, either `git stash -u` or add it to `.gitignore` first. Cherry-pick will refuse to run with uncommitted changes.
 
 As each agent completes:
 

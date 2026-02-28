@@ -33,8 +33,9 @@ digraph dispatch {
   worktree [label="2. Create git worktree\non new branch"];
   dispatch [label="3. Dispatch subagent\n(implement, verify, push)"];
   review [label="4. Review diff + PR"];
+  cleanup [label="5. Remove worktree"];
 
-  plan -> worktree -> dispatch -> review;
+  plan -> worktree -> dispatch -> review -> cleanup;
 }
 ```
 
@@ -53,7 +54,7 @@ Write a detailed plan that includes:
 git worktree add .worktrees/<branch-name> -b <branch-name> main
 ```
 
-Use `.worktrees/` directory (ensure it's in `.gitignore`). Branch name should match the work (e.g., `fix/cache-lock-fs4`).
+Use `.worktrees/` directory. Check that `.worktrees/` is in `.gitignore`. If not, add it before creating the worktree. Branch name should match the work (e.g., `fix/cache-lock-fs4`).
 
 > **Why manual worktrees instead of `isolation: "worktree"`?** The branch is the deliverable — it gets pushed and PR'd. You need a named branch you control. For fan-out/fan-in where you cherry-pick temporary commits back, see `review-and-fix`.
 
@@ -69,6 +70,7 @@ Use the Task tool with these settings:
 
 **Prompt must include:**
 - Worktree path and branch name
+- **Explicit `cd <worktree-absolute-path>` as the subagent's first action.** The Task tool starts subagents in the parent's working directory, not the worktree.
 - Full implementation plan
 - Pre-commit validation commands (from project CLAUDE.md)
 - **Reproduction command** — a command that exercises the same scenario as the original report. Adapt for the worktree context (temp output dirs, etc.) but verify the same behavior.
@@ -82,15 +84,23 @@ Use the Task tool with these settings:
 3. **Reproduce the original scenario** — build and run a command that exercises the same behavior from the original report. Adapt for safety (temp dirs, non-destructive variants) but verify the same scenario.
 4. Commit and push
 
-If the smoke test fails, the subagent must fix the issue and re-verify before pushing. If it cannot fix it, it should commit but NOT push, and report the failure.
+If the reproduction command fails, the subagent must fix the issue and re-verify before pushing. If it cannot fix it, it should commit but NOT push, and report the failure.
 
 ### 4. Review and create PR
 
 When the agent reports back:
 - Check `git log` and `git diff --stat` on the branch
 - Read the actual diff for the key files
-- Confirm the smoke test passed in the agent's output
+- Confirm the reproduction command passed in the agent's output
 - Create the PR (or remind the user)
+
+### 5. Clean up worktree
+
+After the PR is created, remove the worktree:
+
+```bash
+git worktree remove .worktrees/<branch-name>
+```
 
 ## Common Mistakes
 

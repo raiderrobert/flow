@@ -47,24 +47,41 @@ digraph review {
 ### 0. Create a worktree
 
 ```bash
-git worktree add .worktrees/review-<branch> <branch>
+git worktree add --detach .worktrees/review-<branch> <branch>
 ```
 
-Ensure `.worktrees/` is in the project's `.gitignore`. This keeps the main session on its current branch. Clean up after the review.
+> **Why `--detach`?** If `<branch>` is already checked out (e.g., it's the current branch), `git worktree add` will refuse. Using `--detach` creates the worktree in detached HEAD state, avoiding the "already checked out" error. The worktree still has the branch's content.
+
+Check that `.worktrees/` is in `.gitignore`. If not, add it before creating the worktree. This keeps the main session on its current branch. Clean up after the review.
 
 ### 1. Dispatch review subagent (parallel with step 2)
 
-Dispatch an `Explore` subagent (read-only) into the worktree to:
+Dispatch an `Explore` subagent (read-only) into the worktree.
+
+| Parameter | Value |
+|-----------|-------|
+| `subagent_type` | `Explore` |
+| `run_in_background` | `true` |
+
+The subagent should:
+- `cd <worktree-absolute-path>` as its first action (the Task tool starts subagents in the parent's working directory, not the worktree)
 - Read the full diff (`git diff main..<branch>`)
-- Read changed files on main for baseline context
+- Use `git show main:<path>` to read baseline files on main for context
+- Read files directly from the worktree path for the branch version
 - Summarize what the branch does and flag any concerns
 
 **Subagent prompt template:**
-> You are reviewing branch `<branch>` in a worktree at `<path>`. Read `git diff main..<branch>`, read the changed files on main for baseline, and produce a detailed review: what the branch does, any correctness/design concerns with line numbers, and questions about the approach. Do NOT write code.
+> You are reviewing branch `<branch>`. First, `cd <worktree-absolute-path>`. Then read `git diff main..<branch>` and examine the changed files. Use `git show main:<path>` to read baseline files on main. Read files directly from the worktree for the branch version. Produce a detailed review: what the branch does, any correctness/design concerns with line numbers, and questions about the approach. Do NOT write code.
 
 ### 2. Dispatch research subagent (parallel with step 1)
 
-Dispatch a `general-purpose` subagent (`model: "sonnet"`) to:
+| Parameter | Value |
+|-----------|-------|
+| `subagent_type` | `general-purpose` |
+| `model` | `"sonnet"` |
+| `run_in_background` | `true` |
+
+Dispatch a `general-purpose` subagent to:
 - Find established libraries/packages for the problem domain
 - Check how major tools in the ecosystem solve it
 - Identify known failure modes of the approach used
