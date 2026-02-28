@@ -54,7 +54,7 @@ This keeps the main session on its current branch. Clean up after the review.
 
 ### 1. Dispatch review subagent (parallel with step 2)
 
-Dispatch a **read-only subagent** into the worktree to:
+Dispatch an `Explore` subagent (read-only) into the worktree to:
 - Read the full diff (`git diff main..<branch>`)
 - Read changed files on main for baseline context
 - Summarize what the branch does and flag any concerns
@@ -64,7 +64,7 @@ Dispatch a **read-only subagent** into the worktree to:
 
 ### 2. Dispatch research subagent (parallel with step 1)
 
-Dispatch a **research-only subagent** (sonnet) to:
+Dispatch a `general-purpose` subagent (`model: "sonnet"`) to:
 - Find established libraries/packages for the problem domain
 - Check how major tools in the ecosystem solve it
 - Identify known failure modes of the approach used

@@ -1,6 +1,6 @@
 ---
 name: review-and-fix
-description: "Use when the user wants to review code on a branch, find issues, and dispatch parallel fixes. Triggers include: review and fix, review this branch, find and fix issues, dispatch fixes, parallel fix, review then fix, fix all issues, code review with fixes."
+description: "Use when the user wants to review existing work on a branch, find issues, and dispatch parallel fixes that get cherry-picked back. Triggers include: review and fix, review and fix this branch, find and fix issues, dispatch fixes, parallel fix, review then fix, fix all issues, code review with fixes."
 ---
 
 # Review and Fix: Parallel Code Review with Automated Dispatch
@@ -75,6 +75,8 @@ Create one task per finding using `TaskCreate`. Include the finding number, titl
 ### 5. Dispatch Parallel Worktree Agents
 
 Launch one `general-purpose` subagent per fix. Use `isolation: "worktree"`, `run_in_background: true`, and `mode: "bypassPermissions"`.
+
+> **Why `isolation: "worktree"` instead of manual worktrees?** These worktrees are temporary scaffolding — you cherry-pick the commits back by SHA and the worktree is discarded. You don't need named branches. For backgrounding a single task where the branch is the deliverable, see `dispatch-worktree-task`.
 
 **Dispatch order:** Least-coupled fixes first. If two fixes touch the same file, note the dependency and dispatch them sequentially or flag the potential conflict.
 
