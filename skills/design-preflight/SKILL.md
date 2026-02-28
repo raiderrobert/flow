@@ -1,5 +1,5 @@
 ---
-name: visual-design-preflight
+name: design-preflight
 description: "Use BEFORE any Pencil MCP design work in .pen files. Triggers on: design, .pen, pen file, visual design, Pencil, batch_design, create a page, create a screen, design a dashboard, design a landing page, build a layout, mockup, wireframe, UI design, screen design, app design, website design. Ensures design constraints are established before any nodes are inserted."
 globs: ["**/*.pen"]
 ---

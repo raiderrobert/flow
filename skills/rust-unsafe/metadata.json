@@ -1,5 +1,5 @@
 {
-  "name": "unsafe-checker",
+  "name": "rust-unsafe",
   "version": "1.0.0",
   "description": "Unsafe Rust code review and safety abstraction checker",
   "source": "https://github.com/Rust-Coding-Guidelines/rust-coding-guidelines-zh",

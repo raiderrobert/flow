@@ -82,7 +82,7 @@ When domain keywords are present alongside a Rust question, also load the domain
 
 | Pattern | Route To |
 |---------|----------|
-| unsafe, FFI, extern, raw pointer, transmute | `unsafe-checker` skill |
+| unsafe, FFI, extern, raw pointer, transmute | `rust-unsafe` skill |
 | project structure, list structs/traits, call graph, refactor | `rust-lsp` skill |
 
 ## Quick Decision Trees

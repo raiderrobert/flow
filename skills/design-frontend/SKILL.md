@@ -1,5 +1,5 @@
 ---
-name: frontend-design-enhanced
+name: design-frontend
 description: "Use when building web components, pages, or applications with HTML, CSS, JavaScript, React, Vue, Svelte, or any frontend framework. Triggers on: build a page, create a component, design a UI, landing page, dashboard, settings panel, login page, signup form, pricing page, hero section, card component, navigation, sidebar, modal, frontend, web design, HTML, CSS, styled, Tailwind, web app, website. Ensures distinctive, production-grade output that avoids generic AI aesthetics."
 ---
 
