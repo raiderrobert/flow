@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.8](https://github.com/raiderrobert/flow/compare/v0.2.7...v0.2.8) (2026-03-15)
+
+
+### Bug Fixes
+
+* correct README install command and marketplace description ([#24](https://github.com/raiderrobert/flow/issues/24)) ([d69fbfb](https://github.com/raiderrobert/flow/commit/d69fbfba80f7c29f032af09d38b5b59bbd420305))
+
 ## [0.2.7](https://github.com/raiderrobert/flow/compare/v0.2.6...v0.2.7) (2026-03-15)
 
 
