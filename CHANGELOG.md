@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/raiderrobert/flow/compare/v0.2.5...v0.2.6) (2026-03-15)
+
+
+### Bug Fixes
+
+* add execute permission to run-hook.cmd ([#20](https://github.com/raiderrobert/flow/issues/20)) ([c688ce1](https://github.com/raiderrobert/flow/commit/c688ce1f834145297ff16ab5f1a1c72484b8d669))
+
 ## [0.2.5](https://github.com/raiderrobert/flow/compare/v0.2.4...v0.2.5) (2026-02-28)
 
 
