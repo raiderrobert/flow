@@ -1,6 +1,6 @@
 # Flow
 
-A Claude Code plugin with Rust skills, domain expertise, and development workflows.
+Skills that keep you in the flow. Domain expertise baked in so you don't have to stop and explain every detail.
 
 ## Installation
 
