@@ -15,7 +15,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin:
 
 ```bash
-/plugin install flow@flow-dev
+/plugin install flow@flow
 ```
 
 ### Cursor
