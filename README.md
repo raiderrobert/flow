@@ -1,6 +1,6 @@
 # Flow
 
-A Claude Code plugin with Rust skills, domain expertise, and development workflows.
+Skills that keep you in the flow. Domain expertise baked in so you don't have to stop and explain every detail.
 
 ## Installation
 
@@ -15,7 +15,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin:
 
 ```bash
-/plugin install flow@flow-dev
+/plugin install flow@flow
 ```
 
 ### Cursor
