@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.9](https://github.com/raiderrobert/flow/compare/v0.2.8...v0.2.9) (2026-03-15)
+
+
+### Features
+
+* relocate cite-check and review-with-research to sauce ([#26](https://github.com/raiderrobert/flow/issues/26)) ([461cf0f](https://github.com/raiderrobert/flow/commit/461cf0f10653bfdb0f5f79e3d2e4f1f0c606cf04))
+
 ## [0.2.8](https://github.com/raiderrobert/flow/compare/v0.2.7...v0.2.8) (2026-03-15)
 
 
