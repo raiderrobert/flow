@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.10](https://github.com/raiderrobert/flow/compare/v0.2.9...v0.2.10) (2026-03-18)
+
+
+### Features
+
+* add parallel-ticket-pipeline skill ([#28](https://github.com/raiderrobert/flow/issues/28)) ([74d29d3](https://github.com/raiderrobert/flow/commit/74d29d323da7a2e239a92a80d83945e010ccf039))
+
 ## [0.2.9](https://github.com/raiderrobert/flow/compare/v0.2.8...v0.2.9) (2026-03-15)
 
 
