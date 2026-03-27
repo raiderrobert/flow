@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.11](https://github.com/raiderrobert/flow/compare/v0.2.10...v0.2.11) (2026-03-27)
+
+
+### Features
+
+* add CI validation, justfile, and scripts ([#30](https://github.com/raiderrobert/flow/issues/30)) ([1687da0](https://github.com/raiderrobert/flow/commit/1687da042418a34a96ede4746e5b6fbf468bc8ee))
+
+
+### Bug Fixes
+
+* use full name in MIT license ([#32](https://github.com/raiderrobert/flow/issues/32)) ([64c2fb1](https://github.com/raiderrobert/flow/commit/64c2fb1c2abc5fe90a5da77e4710f65874b5529e))
+
 ## [0.2.10](https://github.com/raiderrobert/flow/compare/v0.2.9...v0.2.10) (2026-03-18)
 
 
