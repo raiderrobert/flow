@@ -50,19 +50,19 @@ Start a new session and ask a Rust question. The agent should automatically invo
 
 | Skill | Description |
 |-------|-------------|
-| [design-audit](#design-audit) | Post-generation review catching AI design defaults |
-| [design-frontend](#design-frontend) | Pre-set aesthetic constraints for web components |
-| [design-preflight](#design-preflight) | Design constraints gate before Pencil .pen file work |
-| [diecut](#diecut) | Project scaffolding and template creation with diecut |
-| [dispatch-worktree-task](#dispatch-worktree-task) | Isolated subagent execution in git worktrees |
-| [iterative-review-fix](#iterative-review-fix) | Serial review-fix convergence loop |
-| [parallel-ticket-pipeline](#parallel-ticket-pipeline) | Parallel worktree dispatch for multiple tickets with CI-fix loops |
-| [review-and-fix](#review-and-fix) | Parallel code review with dispatched fixes |
-| [rust](#rust) | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
-| [rust-domain](#rust-domain) | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
-| [rust-lsp](#rust-lsp) | Code analysis, navigation, and refactoring via LSP and cargo tools |
-| [rust-unsafe](#rust-unsafe) | Audit unsafe code blocks for soundness |
+| [design-audit](skills/design-audit/SKILL.md) | Post-generation review catching AI design defaults |
+| [design-frontend](skills/design-frontend/SKILL.md) | Pre-set aesthetic constraints for web components |
+| [design-preflight](skills/design-preflight/SKILL.md) | Design constraints gate before Pencil .pen file work |
+| [diecut](skills/diecut/SKILL.md) | Project scaffolding and template creation with diecut |
+| [dispatch-worktree-task](skills/dispatch-worktree-task/SKILL.md) | Isolated subagent execution in git worktrees |
+| [iterative-review-fix](skills/iterative-review-fix/SKILL.md) | Serial review-fix convergence loop |
+| [parallel-ticket-pipeline](skills/parallel-ticket-pipeline/SKILL.md) | Parallel worktree dispatch for multiple tickets with CI-fix loops |
+| [review-and-fix](skills/review-and-fix/SKILL.md) | Parallel code review with dispatched fixes |
+| [rust](skills/rust/SKILL.md) | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
+| [rust-domain](skills/rust-domain/SKILL.md) | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
+| [rust-lsp](skills/rust-lsp/SKILL.md) | Code analysis, navigation, and refactoring via LSP and cargo tools |
+| [rust-unsafe](skills/rust-unsafe/SKILL.md) | Audit unsafe code blocks for soundness |
 
 ## License
 
-MIT
+[MIT](LICENSE)
