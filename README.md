@@ -50,17 +50,18 @@ Start a new session and ask a Rust question. The agent should automatically invo
 
 | Skill | Description |
 |-------|-------------|
-| rust | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
-| rust-domain | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
-| rust-lsp | Code analysis, navigation, and refactoring via LSP and cargo tools |
-| rust-unsafe | Audit unsafe code blocks for soundness |
-| diecut | Project scaffolding and template creation with diecut |
-| design-preflight | Design constraints gate before Pencil .pen file work |
-| design-frontend | Pre-set aesthetic constraints for web components |
-| design-audit | Post-generation review catching AI design defaults |
-| dispatch-worktree-task | Isolated subagent execution in git worktrees |
-| iterative-review-fix | Serial review-fix convergence loop |
-| review-and-fix | Parallel code review with dispatched fixes |
+| [design-audit](#design-audit) | Post-generation review catching AI design defaults |
+| [design-frontend](#design-frontend) | Pre-set aesthetic constraints for web components |
+| [design-preflight](#design-preflight) | Design constraints gate before Pencil .pen file work |
+| [diecut](#diecut) | Project scaffolding and template creation with diecut |
+| [dispatch-worktree-task](#dispatch-worktree-task) | Isolated subagent execution in git worktrees |
+| [iterative-review-fix](#iterative-review-fix) | Serial review-fix convergence loop |
+| [parallel-ticket-pipeline](#parallel-ticket-pipeline) | Parallel worktree dispatch for multiple tickets with CI-fix loops |
+| [review-and-fix](#review-and-fix) | Parallel code review with dispatched fixes |
+| [rust](#rust) | Comprehensive Rust guidance: ownership, traits, errors, async, design patterns, performance, ecosystem, anti-patterns, and mental models |
+| [rust-domain](#rust-domain) | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
+| [rust-lsp](#rust-lsp) | Code analysis, navigation, and refactoring via LSP and cargo tools |
+| [rust-unsafe](#rust-unsafe) | Audit unsafe code blocks for soundness |
 
 ## License
 
