@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.12](https://github.com/raiderrobert/flow/compare/v0.2.11...v0.2.12) (2026-03-27)
+
+
+### Bug Fixes
+
+* correct broken links in README ([#33](https://github.com/raiderrobert/flow/issues/33)) ([4dfbe60](https://github.com/raiderrobert/flow/commit/4dfbe60593f6898dadad2ae283a0942a8ce5a998))
+
+
+### Documentation
+
+* move skills catalog above installation in README ([658f54d](https://github.com/raiderrobert/flow/commit/658f54d72da2f2a2bec1d70f01646a910d575d26))
+
 ## [0.2.11](https://github.com/raiderrobert/flow/compare/v0.2.10...v0.2.11) (2026-03-27)
 
 
