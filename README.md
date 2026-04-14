@@ -18,6 +18,7 @@ Skills that keep you in the flow. Domain expertise baked in so you don't have to
 | [rust-domain](skills/rust-domain/SKILL.md) | Domain-specific guidance for web, CLI, cloud-native, embedded, fintech, IoT, and ML |
 | [rust-lsp](skills/rust-lsp/SKILL.md) | Code analysis, navigation, and refactoring via LSP and cargo tools |
 | [rust-unsafe](skills/rust-unsafe/SKILL.md) | Audit unsafe code blocks for soundness |
+| [writing-readmes](skills/writing-readmes/SKILL.md) | Write READMEs that follow a proven structure: title, tagline, features, install, quick start, license |
 
 ## Installation
 
