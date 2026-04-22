@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.2.13](https://github.com/raiderrobert/flow/compare/v0.2.12...v0.2.13) (2026-04-22)
+
+
+### Features
+
+* add codebase-audit skill ([#37](https://github.com/raiderrobert/flow/issues/37)) ([daa1e70](https://github.com/raiderrobert/flow/commit/daa1e707b2126a96906c09d4a68c5b4c762a94bc))
+
+
+### Bug Fixes
+
+* exclude dead changelog compare link from lychee check ([#35](https://github.com/raiderrobert/flow/issues/35)) ([1c6556a](https://github.com/raiderrobert/flow/commit/1c6556a30a738321681b36efc7824ef121b5d086))
+
 ## [0.2.12](https://github.com/raiderrobert/flow/compare/v0.2.11...v0.2.12) (2026-03-27)
 
 
