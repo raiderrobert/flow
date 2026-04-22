@@ -6,6 +6,7 @@ Skills that keep you in the flow. Domain expertise baked in so you don't have to
 
 | Skill | Description |
 |-------|-------------|
+| [codebase-audit](skills/codebase-audit/SKILL.md) | Structural review of codebase organization against a standard checklist plus project conventions |
 | [design-audit](skills/design-audit/SKILL.md) | Post-generation review catching AI design defaults |
 | [design-frontend](skills/design-frontend/SKILL.md) | Pre-set aesthetic constraints for web components |
 | [design-preflight](skills/design-preflight/SKILL.md) | Design constraints gate before Pencil .pen file work |

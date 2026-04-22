@@ -163,6 +163,16 @@ Examples: "core/ must not import from commands/", "all handlers return a Result 
 
 ---
 
+## Common Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| Reporting every code smell regardless of impact | Skip findings that are technically true but don't matter in practice |
+| Auditing PR diff instead of full codebase | This skill evaluates structure, not changes. Use `review-and-fix` for diffs |
+| Omitting project-specific conventions from AGENTS.md/CLAUDE.md | Always read project docs first — project-specific criteria often surface the most actionable findings |
+| Organizing findings by criterion instead of by file | Findings grouped by file are actionable; by criterion is academic |
+| Treating HIGH severity as "fix immediately" | HIGH means architectural risk or likely bug source, not urgency. Let the user prioritize |
+
 ## Scope Boundaries
 
 This skill produces a report. It does not fix anything.
